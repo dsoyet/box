@@ -14,7 +14,7 @@ EOF
     vm_name          = source.name
     iso_url          = local.iso_url_centos_stable
     iso_checksum     = "file:${local.iso_checksum_url_centos_stable}"
-    output_directory = source.name
+    output_directory = "${local.artifact_directory}/share/${source.name}"
     boot_command     = local.centos_uefi_boot_command
 
     shutdown_command               = "echo 'share' | sudo -S /sbin/halt -h -p"
@@ -26,12 +26,12 @@ EOF
   }
 
   source "source.vmware-iso.uefi" {
-    name             = "hi"
+    name             = "rhel"
     guest_os_type    = "rhel8-64"
     vm_name          = source.name
     iso_url          = local.iso_url_rhel
-    iso_checksum     = local.iso_checksum_url_rhel
-    output_directory = source.name
+    iso_checksum     = local.iso_checksum_url_ubuntu_server
+    output_directory = "${local.artifact_directory}/share/${source.name}"
     boot_command     = local.rhel_uefi_boot_command
 
     shutdown_command               = "echo 'share' | sudo -S /sbin/halt -h -p"

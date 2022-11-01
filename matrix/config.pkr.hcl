@@ -30,10 +30,10 @@ locals {
   iso_url_centos_stable          = "http://mirrors.nju.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-2009.iso"
   iso_checksum_url_centos_stable = "http://mirrors.nju.edu.cn/centos/7/isos/x86_64/sha256sum.txt"
   centos_bios_boot_command = [
-    "<up><wait><tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos.cfg<enter><wait>"
+    "<up><wait><tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/http/centos.cfg<enter><wait>"
   ]
   centos_uefi_boot_command = [
-    "<up>e<down><down><end><bs><bs><bs><bs><bs>inst.text inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos.cfg<leftCtrlOn>x<leftCtrlOff>"
+    "<up>e<down><down><end><bs><bs><bs><bs><bs>inst.text inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/http/centos.cfg<leftCtrlOn>x<leftCtrlOff>"
   ]
 }
 
@@ -70,10 +70,10 @@ locals {
 }
 
 locals {
-  iso_url_rhel          = "artifacts/rhel.iso"
+  iso_url_rhel          = "${local.artifact_directory}/boot/rhel-8.6-x86_64-dvd.iso"
   iso_checksum_url_rhel = "none"
   rhel_uefi_boot_command = [
-    "<up>e<down><down><end><bs><bs><bs><bs><bs>inst.text inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/rhel.cfg<leftCtrlOn>x<leftCtrlOff>"
+    "<up>e<down><down><end><bs><bs><bs><bs><bs>inst.text inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/http/rhel.cfg<leftCtrlOn>x<leftCtrlOff>"
   ]
 }
 

@@ -20,17 +20,23 @@ EOF
 
     shutdown_command = "shutdown /s /t 1 /f /d p:4:1 /c \"Packer Shutdown\""
     cd_files = [
-      "${local.artifact_directory}/etc/${source.name}/*"
+      "${local.windows_configset_directory}/Packages/OnDemandPack",
+      "${local.windows_configset_directory}/$OEM$",
+      "${local.windows_configset_directory}/AutoUnattend.xml"
     ]
     cd_label       = "X64FRE"
-    communicator   = "winrm"
-    winrm_password = "Share"
-    winrm_timeout  = "1h"
-    winrm_username = "Share"
+    // communicator   = "winrm"
+    // winrm_password = "Share"
+    // winrm_timeout  = "1h"
+    // winrm_username = "Share"
+    communicator   = "ssh"
+    ssh_password = "Share"
+    ssh_timeout  = "1h"
+    ssh_username = "Share"
   }
 
   post-processor "vagrant" {
-    keep_input_artifact = true
+    keep_input_artifact = false
     output              = "${local.artifact_directory}/share/${source.name}.box"
   }
 

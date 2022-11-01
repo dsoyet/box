@@ -5,7 +5,7 @@ variable "unattend_path" {
 
 variable "headless" {
   type    = bool
-  default = true
+  default = false
 }
 
 locals {
@@ -13,7 +13,8 @@ locals {
   // set to a list of strings and we then take the directory of the first
   // value. This validates that the http directory exists even before starting
   // any builder/provisioner.
-  artifact_directory = "D:/ROOT/artifacts"
+  artifact_directory = "D:/Ventoy/SC"
+  windows_configset_directory = "D:/Image"
   http_directory_content = {
     "/tumbleweed.xml" = file("${local.artifact_directory}/http/tumbleweed.xml"),
     "/leap.xml"       = file("${local.artifact_directory}/http/leap.xml"),

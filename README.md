@@ -14,7 +14,7 @@ project
 
 ```
 ### windows
-artifacts dir D:\Users\Share\SC
+artifacts dir D:\Ventoy\SC
 ```
 project
 │   README.md     
@@ -28,5 +28,8 @@ project
 
 ## Example
 ```
-packer build -only linux.vmware-iso.ubuntu matrix
+# build ubuntu
+Packer64 build -only linux.vmware-iso.ubuntu matrix
+# build windows
+Packer64 build -only windows.vmware-iso.desktop matrix
 ```

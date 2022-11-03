@@ -20,10 +20,9 @@ EOF
 
     shutdown_command = "shutdown /s /t 1 /f /d p:4:1 /c \"Packer Shutdown\""
     cd_files = [
-      "${local.windows_configset_directory}/Packages/OnDemandPack",
-      "${local.windows_configset_directory}/Packages/Get",
+      "${local.windows_configset_directory}/Packages",
       "${local.windows_configset_directory}/$OEM$",
-      "${local.windows_configset_directory}/AutoUnattend.xml"
+      "${local.artifact_directory}/http/AutoUnattend.xml"
     ]
     cd_label       = "X64FRE"
     // communicator   = "winrm"

@@ -13,6 +13,7 @@ source "vmware-iso" "uefi" {
     "cpuid.coresPerSocket"    = "1"
     "firmware"                = "efi"
     "sata1.present"           = "TRUE"
+    "bios.bootorder"          = ""
   }
   vmx_data_post = {
     "ide0:0.present" = "FALSE"

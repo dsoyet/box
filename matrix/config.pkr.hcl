@@ -5,7 +5,7 @@ variable "unattend_path" {
 
 variable "headless" {
   type    = bool
-  default = false
+  default = true
 }
 
 locals {
@@ -46,8 +46,10 @@ locals {
 }
 
 locals {
-  iso_url_ubuntu_server          = "${local.artifact_directory}/boot/ubuntu-22.10-live-server-amd64.iso"
-  iso_checksum_url_ubuntu_server = "none"
+  // iso_url_ubuntu_server          = "http://mirrors.nju.edu.cn/ubuntu-releases/jammy/ubuntu-22.04.1-live-server-amd64.iso"
+  // iso_checksum_url_ubuntu_server = "http://mirrors.nju.edu.cn/ubuntu-releases/jammy/SHA256SUMS"
+  iso_url_ubuntu_server          = "http://mirrors.nju.edu.cn/ubuntu-releases/kinetic/ubuntu-22.10-live-server-amd64.iso"
+  iso_checksum_url_ubuntu_server = "http://mirrors.nju.edu.cn/ubuntu-releases/kinetic/SHA256SUMS"
   ubuntu_server_uefi_boot_command = [
     "<wait><wait><wait><wait><wait>c<wait>set gfxpayload=keep<enter><wait>linux /casper/vmlinuz quiet<wait> autoinstall<wait> ---<enter><wait>initrd /casper/initrd<wait><enter><wait>boot<enter><wait>"
   ]
@@ -65,7 +67,7 @@ locals {
   iso_url_kali          = "http://mirrors.nju.edu.cn/kali-images/current/kali-linux-2022.3-installer-netinst-amd64.iso"
   iso_checksum_url_kali = "http://mirrors.nju.edu.cn/kali-images/current/SHA256SUMS"
   kali_uefi_boot_command = [
-    "<wait>e<down><down><down><leftCtrlOn>k<leftCtrlOff>    linux    /install.amd/vmlinuz net.ifnames=0 console-setup/ask_detect=false auto console-setup/layoutcode=us console-setup/modelcode=pc105 debconf/frontend=noninteractive debian-installer=en_US fb=false preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kali.seed auto=true priority=critical --- quiet<leftCtrlOn>x<leftCtrlOff>"
+    "<wait>e<down><down><down><leftCtrlOn>k<leftCtrlOff>    linux    /install.amd/vmlinuz net.ifnames=0 console-setup/ask_detect=false auto console-setup/layoutcode=us console-setup/modelcode=pc105 debconf/frontend=noninteractive debian-installer=en_US fb=false preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/http/kali.cfg auto=true priority=critical --- quiet<leftCtrlOn>x<leftCtrlOff>"
   ]
 }
 

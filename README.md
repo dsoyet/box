@@ -34,13 +34,17 @@ Packer64 build -only windows.vmware-iso.desktop matrix
 vagrant plugin install vagrant-vmware-desktop
 # build ubuntu
 Packer64 build -only linux.vmware-iso.ubuntu matrix
+# 
 ```
+
+## Misc
+1. copy [fod packages](https://www.nico-maas.de/?p=2287)
 
 ## Math
 When $a \ne 0$, there are two solutions to $(ax^2 + bx + c = 0)$ and they are 
 $$ x = {-b \pm \sqrt{b^2-4ac} \over 2a} $$
 
-## Windows 11
+## Snippet
 ```
             <RunSynchronous>
                 <RunSynchronousCommand wcm:action="add">
@@ -59,4 +63,10 @@ $$ x = {-b \pm \sqrt{b^2-4ac} \over 2a} $$
                     <Path>cmd /c reg add "HKLM\SYSTEM\Setup\LabConfig" /v "BypassRAMCheck" /t REG_DWORD /d 1</Path>
                 </RunSynchronousCommand>
             </RunSynchronous>
+```
+```
+@echo off
+for /f %%D in ('wmic volume get DriveLetter^, Label ^| find "Ventoy"') do set USB=%%D
+%USB%\Hardware\VMware\Tools\setup.exe /S /v "/qn REBOOT=R"
+pause
 ```

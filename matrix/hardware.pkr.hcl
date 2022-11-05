@@ -14,6 +14,8 @@ source "vmware-iso" "uefi" {
     "firmware"                = "efi"
     "sata1.present"           = "TRUE"
     "bios.bootorder"          = ""
+    "hgfs.linkrootshare"      = "FALSE"
+    "hgfs.maprootshare"       = "FALSE"
   }
   vmx_data_post = {
     "ide0:0.present" = "FALSE"

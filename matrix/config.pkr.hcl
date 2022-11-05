@@ -46,6 +46,14 @@ locals {
 }
 
 locals {
+  iso_url_outlook_22h2          = "${local.artifact_directory}/boot/22621.755.221019-1136.NI_RELEASE_SVC_PROD3_CLIENTMULTI_X64FRE_EN-US.ISO"
+  iso_checksum_url_outlook_22h2 = "none"
+  outlook_uefi_boot_command = [
+    "CD"
+  ]
+}
+
+locals {
   // iso_url_ubuntu_server          = "http://mirrors.nju.edu.cn/ubuntu-releases/jammy/ubuntu-22.04.1-live-server-amd64.iso"
   // iso_checksum_url_ubuntu_server = "http://mirrors.nju.edu.cn/ubuntu-releases/jammy/SHA256SUMS"
   iso_url_ubuntu_server          = "http://mirrors.nju.edu.cn/ubuntu-releases/kinetic/ubuntu-22.10-live-server-amd64.iso"

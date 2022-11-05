@@ -148,7 +148,7 @@ $Computer = Get-CimInstance -ClassName Win32_ComputerSystem
 switch ($Computer.Model) {
     "ASUS TUF Gaming F15 FX506HM_FX506HM" {
         Write-Host "System OS Config ..."
-        VMwareHorizonOSOptimizationTool.exe -o -t C:\Windows\System32\OVF.xml -storeapp remove-all -firewall disable -windowsupdate disable -antivirus disable -securitycenter disable -f 3 4 5 6 8
+        VMwareHorizonOSOptimizationTool.exe -o -t C:\Windows\System32\OVF.xml -firewall disable -windowsupdate disable -antivirus disable -securitycenter disable -f 3 4 5 6 8
         Restart-Computer
     }
     "VMware7,1" {

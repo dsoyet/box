@@ -46,7 +46,7 @@ locals {
 }
 
 locals {
-  iso_url_outlook_22h2          = "${local.artifact_directory}/boot/22621.755.221019-1136.NI_RELEASE_SVC_PROD3_CLIENTMULTI_X64FRE_EN-US.ISO"
+  iso_url_outlook_22h2          = "${local.artifact_directory}/boot/22621.755.221019-1136.NI_RELEASE_SVC_PROD3_CLIENTMULTISESSION_VOL_X64FRE_EN-US.ISO"
   iso_checksum_url_outlook_22h2 = "none"
   outlook_uefi_boot_command = [
     "CD"

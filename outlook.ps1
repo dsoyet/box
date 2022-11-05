@@ -104,7 +104,7 @@ reg import Registry11.reg
 $UserLanguageList = New-WinUserLanguageList -Language "en-US"
 $UserLanguageList.Add("zh-CN")
 Set-WinUserLanguageList -LanguageList $UserLanguageList -Confirm:$false -Force
-Set-WinSystemLocale -SystemLocale zh-CN
+# Set-WinSystemLocale -SystemLocale zh-CN
 
 # $WIFI = @('Home.xml', 'Portable.xml', 'Work.xml')
 # $WIFI.ForEach({
@@ -112,7 +112,7 @@ Set-WinSystemLocale -SystemLocale zh-CN
 #     })
 
 Write-Host "Clean System ..."
-$ULINK = @('Vivaldi.lnk', '115*', 'Chromium', 'Lark.lnk')
+$ULINK = @('Vivaldi.lnk', '115*', 'Chromium', 'Lark.lnk', 'Visual Studio Code')
 $ULINK.ForEach({
         Write-Host $_
         Remove-Item "$Env:AppData\Microsoft\Windows\Start Menu\Programs\$_" -Recurse -Force
@@ -128,7 +128,7 @@ $EDGE.ForEach({
         }
     })
 
-$PLINK = @('Notepad++.lnk', 'Zotero.lnk', '7-Zip-Zstandard', 'Git', 'Nutstore', 'OpenVPN Connect', 'PuTTY (64-bit)')
+$PLINK = @('Notepad++.lnk', 'Zotero.lnk', '7-Zip-Zstandard', 'Git', 'Nutstore', 'OpenVPN Connect', 'PuTTY (64-bit)', 'VMware', 'PowerShell')
 $PLINK.ForEach({
         Write-Host $_
         Remove-Item "$Env:ProgramData\Microsoft\Windows\Start Menu\Programs\$_" -Recurse -Force

@@ -32,7 +32,7 @@ switch ($Computer.Model) {
                 Write-Host $_
                 Unregister-ScheduledTask -TaskName $_ -Confirm:$False
             })
-        Write-Host "$(Get-Item Potplayer*).Name"
+        Write-Host "$(Get-Item Potplayer*)"
         Start-Process -FilePath $(Get-Item Potplayer*).Name -ArgumentList '/S /D=C:\Program Files\Potplayer' -Wait
     }
     "VMware7,1" {}
@@ -99,7 +99,7 @@ Set-ItemProperty -Path "$($DAC.Name[1].replace('HKEY_CURRENT_USER', 'HKCU:'))\Cu
 
 Write-Host "Config ..."
 C:\Windows\System32\Sip64.exe x ConfigSet.7z -y -oC:\
-reg import Registry10.reg
+reg import Registry.reg
 
 $UserLanguageList = New-WinUserLanguageList -Language "en-US"
 $UserLanguageList.Add("zh-CN")
@@ -148,7 +148,7 @@ $Computer = Get-CimInstance -ClassName Win32_ComputerSystem
 switch ($Computer.Model) {
     "ASUS TUF Gaming F15 FX506HM_FX506HM" {
         Write-Host "System OS Config ..."
-        VMwareHorizonOSOptimizationTool.exe -o -t C:\Windows\System32\OVF.xml -storeapp remove-all -firewall disable -windowsupdate disable -antivirus disable -securitycenter disable -f 3 4 5 6 8
+        VMwareHorizonOSOptimizationTool.exe -o -t C:\Windows\System32\OVF.xml -firewall disable -windowsupdate disable -antivirus disable -securitycenter disable -f 3 4 5 6 8
         Restart-Computer
     }
     "VMware7,1" {

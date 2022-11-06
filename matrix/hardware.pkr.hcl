@@ -16,6 +16,7 @@ source "vmware-iso" "uefi" {
     "bios.bootorder"          = ""
     "hgfs.linkrootshare"      = "FALSE"
     "hgfs.maprootshare"       = "FALSE"
+    "ulm.disableMitigations"  = "TRUE"
   }
   vmx_data_post = {
     "ide0:0.present" = "FALSE"

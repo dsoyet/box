@@ -83,7 +83,7 @@ $MSI.ForEach({
         Write-Host $(Get-Item $_).Name
         Start-Process msiexec.exe -ArgumentList "/qn /i $($(Get-Item $_).Name) /norestart" -Wait
     })
-Start-Process -FilePath Proxy.exe -ArgumentList '/VERYSILENT /NOCANCEL /NORESTART /NOICONS /DIR="C:\Program Files (x86)\Proxy"' -Wait
+# Start-Process -FilePath Proxy.exe -ArgumentList '/VERYSILENT /NOCANCEL /NORESTART /NOICONS /DIR="C:\Program Files (x86)\Proxy"' -Wait
 Write-Host $(Get-Item Nutstore*).Name
 Start-Process -FilePath $(Get-Item Nutstore*).Name -ArgumentList '/exenoui /quiet /passive' -Wait
 Write-Host $(Get-Item Lark-win32_ia32-*).Name
@@ -99,7 +99,7 @@ Set-ItemProperty -Path "$($DAC.Name[1].replace('HKEY_CURRENT_USER', 'HKCU:'))\Cu
 
 Write-Host "Config ..."
 C:\Windows\System32\Sip64.exe x ConfigSet.7z -y -oC:\
-reg import Registry11.reg
+reg import Registry.reg
 
 $UserLanguageList = New-WinUserLanguageList -Language "en-US"
 $UserLanguageList.Add("zh-CN")

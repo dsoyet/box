@@ -29,7 +29,7 @@ project
 ## Example
 ```
 # build windows
-Packer64 build -only windows.vmware-iso.desktop matrix
+Packer64 build -only windows.vmware-iso.outlook matrix
 # vmware-desktop
 vagrant plugin install vagrant-vmware-desktop
 # build ubuntu

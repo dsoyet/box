@@ -1,10 +1,17 @@
 #!/bin/sh -eux
 
 CONFIG_SCRIPT='/usr/local/bin/arch-config.sh'
-ROOT_PARTITION='/dev/vda2'
+if [ -b /dev/vda ]; then
+  ROOT_DISK='vda'
+fi
+if [ -b /dev/sda ]; then
+  ROOT_DISK='sda'
+fi
+
+ROOT_PARTITION="/dev/${ROOT_DISK}2"
 
 # Partition and format disk
-parted "/dev/vda" ---pretend-input-tty <<EOF
+parted "/dev/${ROOT_DISK}" ---pretend-input-tty <<EOF
 mktable gpt
 mkpart primary 0% 10%
 mkpart primary 10% 90%
@@ -13,10 +20,10 @@ quit
 EOF
 
 mkfs.btrfs ${ROOT_PARTITION} 
-mkfs.fat -F 32 /dev/vda1
+mkfs.fat -F 32 /dev/${ROOT_DISK}1
 mount ${ROOT_PARTITION} /mnt
 mkdir /mnt/efi
-mount /dev/vda1 /mnt/efi
+mount /dev/${ROOT_DISK}1 /mnt/efi
 
 # Installation
 cat << 'EOF' > /etc/pacman.d/mirrorlist

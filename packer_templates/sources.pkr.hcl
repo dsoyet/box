@@ -80,7 +80,7 @@ locals {
   memory = var.memory == null ? (
     var.is_windows || var.os_name == "macos" ? 4096 : 2048
   ) : var.memory
-  output_directory = var.output_directory == null ? "/usb/tmp/${var.os_version}-${var.os_arch}" : var.output_directory
+  output_directory = var.output_directory == null ? "/usb/phone/tmp/${var.os_version}-${var.os_arch}" : var.output_directory
   shutdown_command = var.shutdown_command == null ? (
     var.is_windows ? "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"" : (
       var.os_name == "macos" ? "echo 'vagrant' | sudo -S shutdown -h now" : (

@@ -7,8 +7,8 @@ sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=true/g' /etc/defa
 update-grub;
 
 # for default efi boot
-mkdir -p /boot/efi/EFI/Boot
-cp /boot/efi/EFI/kali/grubx64.efi /boot/efi/EFI/Boot/bootx64.efi
+# mkdir -p /boot/efi/EFI/Boot
+# cp /boot/efi/EFI/kali/grubx64.efi /boot/efi/EFI/Boot/bootx64.efi
 
 
 

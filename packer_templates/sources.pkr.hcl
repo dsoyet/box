@@ -93,7 +93,7 @@ source "hyperv-iso" "vm" {
   boot_wait        = var.hyperv_boot_wait == null ? local.default_boot_wait : var.hyperv_boot_wait
   cd_files         = var.hyperv_generation == 2 ? local.cd_files : null
   cd_content = {
-    "AutoUnattend.xml" = templatefile("AutoUnattend.xml", { image = var.os_image, lang = var.os_lang })
+    "AutoUnattend.xml" = templatefile("http/windows/${var.os_version}.xml", { image = var.os_image, lang = var.os_lang })
   }
   cpus             = var.cpus
   communicator     = local.communicator
@@ -135,7 +135,7 @@ source "qemu" "vm" {
   boot_wait        = var.qemu_boot_wait == null ? local.default_boot_wait : var.qemu_boot_wait
   cd_files         = var.hyperv_generation == 2 ? local.cd_files : null
   cd_content = {
-    "AutoUnattend.xml" = templatefile("AutoUnattend.xml", { image = var.os_image, lang = var.os_lang })
+    "AutoUnattend.xml" = templatefile("http/windows/${var.os_version}.xml", { image = var.os_image, lang = var.os_lang })
   }
   cpus             = var.cpus
   cpu_model        = var.cpu_model

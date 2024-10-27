@@ -9,7 +9,7 @@ locals {
   ) : var.hyperv_enable_secure_boot
 
   # qemu
-  qemu_binary  = var.qemu_binary == null ? "qemu-system-${var.os_arch}" : var.qemu_binary
+  qemu_binary = var.qemu_binary == null ? "qemu-system-${var.os_arch}" : var.qemu_binary
   qemu_use_default_display = var.qemu_use_default_display == null ? (
     var.os_arch == "aarch64" ? true : false
   ) : var.qemu_use_default_display
@@ -51,6 +51,19 @@ locals {
       )
     ) : null
   ) : var.cd_files
+  cd_content = var.cd_content == null ? (
+    var.is_windows ? (
+      var.hyperv_generation == 2 ? {
+        "AutoUnattend.xml" = templatefile("http/windows/${var.os_version}.xml", { image = var.os_image, lang = var.os_lang })
+        } : (
+        var.os_arch == "x86_64" ? [
+          "${path.root}/win_answer_files/${var.os_version}/Autounattend.xml",
+          ] : [
+          "${path.root}/win_answer_files/${var.os_version}/arm64/Autounattend.xml",
+        ]
+      )
+    ) : null
+  ) : var.cd_content
   communicator = var.communicator == null ? (
     var.is_windows ? "winrm" : "ssh"
   ) : var.communicator
@@ -92,9 +105,7 @@ source "hyperv-iso" "vm" {
   boot_command     = var.boot_command
   boot_wait        = var.hyperv_boot_wait == null ? local.default_boot_wait : var.hyperv_boot_wait
   cd_files         = var.hyperv_generation == 2 ? local.cd_files : null
-  cd_content = {
-    "AutoUnattend.xml" = templatefile("http/windows/${var.os_version}.xml", { image = var.os_image, lang = var.os_lang })
-  }
+  cd_content       = var.hyperv_generation == 2 ? local.cd_content : null
   cpus             = var.cpus
   communicator     = local.communicator
   disk_size        = var.disk_size
@@ -134,9 +145,7 @@ source "qemu" "vm" {
   boot_command     = var.boot_command
   boot_wait        = var.qemu_boot_wait == null ? local.default_boot_wait : var.qemu_boot_wait
   cd_files         = var.hyperv_generation == 2 ? local.cd_files : null
-  cd_content = {
-    "AutoUnattend.xml" = templatefile("http/windows/${var.os_version}.xml", { image = var.os_image, lang = var.os_lang })
-  }
+  cd_content       = var.hyperv_generation == 2 ? local.cd_content : null
   cpus             = var.cpus
   cpu_model        = var.cpu_model
   communicator     = local.communicator

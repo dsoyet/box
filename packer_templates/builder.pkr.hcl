@@ -133,7 +133,7 @@ build {
   }
   post-processor "vagrant" {
     # compression_level = 9
-    output            = "/home/share/Phone/${var.os_version}_${upper(var.os_lang)}-${var.os_name}-${var.os_arch}.{{ .Provider }}.box"
+    output = "/home/share/Phone/${var.os_version}_${upper(var.os_lang)}-${var.os_name}-${var.os_arch}.{{ .Provider }}.box"
     vagrantfile_template = var.is_windows ? "${path.root}/vagrantfile-windows.template" : (
       var.os_name == "freebsd" ? "${path.root}/vagrantfile-freebsd.template" : null
     )

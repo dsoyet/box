@@ -4,7 +4,7 @@
 HOME_DIR="${HOME_DIR:-/home/vagrant}";
 
 mkdir -p $HOME_DIR/.ssh;
-sed -i 's:\\u@::g' $HOME_DIR/.bashrc
+sed -i 's:\\u::g' $HOME_DIR/.bashrc
 
 # password-less sudo
 echo 'vagrant ALL=(ALL) NOPASSWD:ALL' >/etc/sudoers.d/99_vagrant;

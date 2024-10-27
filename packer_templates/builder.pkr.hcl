@@ -13,10 +13,10 @@ packer {
       version = ">= 1.0.2"
       source  = "github.com/hashicorp/vagrant"
     }
-    windows-update = {
-      version = ">= 0.14.1"
-      source  = "github.com/rgl/windows-update"
-    }
+    # windows-update = {
+    #   version = ">= 0.14.1"
+    #   source  = "github.com/rgl/windows-update"
+    # }
   }
 }
 

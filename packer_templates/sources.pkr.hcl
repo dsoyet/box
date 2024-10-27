@@ -18,7 +18,7 @@ locals {
   ) : var.qemu_machine_type
   qemuargs = var.qemuargs == null ? (
     var.is_windows ? [
-      ["-cdrom", "${var.iso_directory}/${var.odt_url}${upper(var.os_lang)}.ISO"]
+      ["-cdrom", "${var.odt_url}"]
       ] : (
       var.os_arch == "aarch64" ? [
         ["-boot", "strict=off"]
@@ -102,7 +102,7 @@ source "hyperv-iso" "vm" {
   headless         = var.headless
   http_directory   = local.http_directory
   iso_checksum     = var.iso_checksum
-  iso_url          = "${var.iso_directory}/${var.iso_url}${upper(var.os_lang)}.ISO"
+  iso_url          = var.iso_url
   memory           = local.memory
   output_directory = "${local.output_directory}-hyperv"
   shutdown_command = local.shutdown_command
@@ -145,7 +145,7 @@ source "qemu" "vm" {
   headless         = var.headless
   http_directory   = local.http_directory
   iso_checksum     = var.iso_checksum
-  iso_url          = "${var.iso_directory}/${var.iso_url}${upper(var.os_lang)}.ISO"
+  iso_url          = var.iso_url
   memory           = local.memory
   output_directory = "${local.output_directory}-qemu"
   shutdown_command = local.shutdown_command

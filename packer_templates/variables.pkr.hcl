@@ -17,11 +17,6 @@ variable "os_lang" {
   default     = "en-US"
   description = "OS lang"
 }
-variable "iso_directory" {
-  type        = string
-  default     = "/home/share/Phone/ISO"
-  description = "ISO location"
-}
 variable "os_arch" {
   type = string
   validation {

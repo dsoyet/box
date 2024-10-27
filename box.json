@@ -6,7 +6,7 @@
         "version": "20240901.259602",
         "providers": [
           {
-            "name": "libvirt",
+            "name": "hyperv",
         "architecture": "amd64",
             "url": "file:///home/share/Phone/2024_EN-US-archlinux-x86_64.hyperv.box"
           }

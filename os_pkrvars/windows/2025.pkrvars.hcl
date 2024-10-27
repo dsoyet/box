@@ -1,0 +1,10 @@
+os_name                 = "windows"
+os_version              = "2025"
+os_arch                 = "x86_64"
+os_image                = "Windows Server 2025 ServerDatacenter"
+os_lang                 = "en-US"
+is_windows              = true
+iso_url                 = "26100.1.240331-1435.GE_RELEASE_SERVERDATACENTER_OEMRET_X64FRE_"
+odt_url                 = "2024.ODT_"
+iso_checksum            = "sha256:ec9011bc54f0fdbe33b43c682eeeb36fb455717eaefe385bba1675fb9967da06"
+boot_command            = ["<enter><enter><enter><enter><enter><enter>"]

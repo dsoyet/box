@@ -23,12 +23,12 @@ packer {
 locals {
   scripts = var.scripts == null ? (
     var.is_windows ? [
+      "${path.root}/scripts/windows/defender.ps1",
       "${path.root}/scripts/windows/openssh.ps1",
       "${path.root}/scripts/windows/init.ps1",
       "${path.root}/scripts/windows/pkg.ps1",
       "${path.root}/scripts/windows/rule.ps1",
       "${path.root}/scripts/windows/update.ps1",
-      "${path.root}/scripts/windows/defender.ps1",
       ] : (
       var.os_name == "archlinux" ? [
         "${path.root}/scripts/common/archlinux.sh"

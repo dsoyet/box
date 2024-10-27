@@ -5,6 +5,7 @@ variable "os_name" {
 }
 variable "os_version" {
   type        = string
+  default     = "2025"
   description = "OS version number"
 }
 variable "os_image" {

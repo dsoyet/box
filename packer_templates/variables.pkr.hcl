@@ -163,6 +163,10 @@ variable "cd_files" {
   type    = list(string)
   default = null
 }
+variable "cd_content" {
+  type    = map(string)
+  default = null
+}
 variable "cpus" {
   type    = number
   default = 2

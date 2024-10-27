@@ -11,7 +11,7 @@ foreach ( $pac in $Package){
     Start-Process -WorkingDirectory "E:\pkg" -FilePath E:\pkg\$pac -ArgumentList '/quiet /norestart' -Wait
 }
 echo "Install adksetup.exe"
-Start-Process -WorkingDirectory "E:\pkg" -FilePath E:\pkg\adksetup.exe -ArgumentList '/quiet /norestart /layout "E:\pkg\Windows Kit\10\ADK"' -Wait
+Start-Process -WorkingDirectory "E:\pkg" -FilePath E:\pkg\adksetup.exe -ArgumentList '/installpath "C:\Program Files (x86)\Windows Kits\10" /features OptionId.DeploymentTools /quiet' -Wait
 
 $Package = "Git-2.47.0-64-bit.exe"
 foreach ( $pac in $Package){

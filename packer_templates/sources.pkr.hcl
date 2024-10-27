@@ -56,11 +56,11 @@ locals {
       var.hyperv_generation == 2 ? {
         "AutoUnattend.xml" = templatefile("http/windows/${var.os_version}.xml", { image = var.os_image, lang = var.os_lang })
         } : (
-        var.os_arch == "x86_64" ? [
-          "${path.root}/win_answer_files/${var.os_version}/Autounattend.xml",
-          ] : [
-          "${path.root}/win_answer_files/${var.os_version}/arm64/Autounattend.xml",
-        ]
+        var.os_arch == "x86_64" ? {
+        "AutoUnattend.xml" = templatefile("http/windows/${var.os_version}.xml", { image = var.os_image, lang = var.os_lang })
+        } : {
+        "AutoUnattend.xml" = templatefile("http/windows/${var.os_version}.xml", { image = var.os_image, lang = var.os_lang })
+        }
       )
     ) : null
   ) : var.cd_content

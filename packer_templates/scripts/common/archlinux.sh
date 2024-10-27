@@ -3,9 +3,11 @@
 CONFIG_SCRIPT='/usr/local/bin/arch-config.sh'
 if [ -b /dev/vda ]; then
   ROOT_DISK='vda'
+  PKGS='base linux openssh sudo'
 fi
 if [ -b /dev/sda ]; then
   ROOT_DISK='sda'
+  PKGS='base linux openssh sudo hyperv'
 fi
 
 ROOT_PARTITION="/dev/${ROOT_DISK}2"
@@ -49,8 +51,7 @@ Name=e*
 DHCP=yes
 EOF
 
-# pacstrap /mnt base base-devel linux gptfdisk openssh grub efibootmgr dhcpcd netctl rng-tools linux-headers open-vm-tools nfs-utils
-pacstrap /mnt base linux openssh sudo
+pacstrap /mnt ${PKGS}
 
 # Config
 install --mode=0755 /dev/null "/mnt${CONFIG_SCRIPT}"
@@ -70,6 +71,9 @@ cat <<-EOF > "/mnt${CONFIG_SCRIPT}"
 
   sed -i 's/#UseDNS yes/UseDNS no/' /etc/ssh/sshd_config
   systemctl enable sshd #rngd vmtoolsd rpcbind
+  if [ -f /usr/lib/systemd/system/hv_kvp_daemon.service ]; then
+    systemctl enable hv_kvp_daemon.service hv_vss_daemon.service
+  fi
 
   useradd --create-home --user-group vagrant
   echo 'vagrant:vagrant' | chpasswd

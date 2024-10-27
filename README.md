@@ -54,6 +54,7 @@ Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
 git clone https://gitee.com/xanflorp/box.git
 cd box
 packer init -upgrade ./packer_templates
+echo "done"
 packer build --only=hyperv-iso.vm --var-file=os_pkrvars/deb/mint.pkrvars.hcl packer_templates
 ```
 

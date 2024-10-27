@@ -128,7 +128,7 @@ variable "qemu_efi_firmware_vars" {
 }
 variable "qemu_efi_drop_efivars" {
   type        = bool
-  default     = true
+  default     = false
   description = "Drop EFI vars"
 }
 variable "qemu_format" {

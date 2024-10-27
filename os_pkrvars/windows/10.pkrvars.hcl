@@ -1,0 +1,10 @@
+os_name                 = "windows"
+os_version              = "11"
+os_arch                 = "x86_64"
+os_image                = "Windows 11 Enterprise"
+os_lang                 = "zh-CN"
+is_windows              = true
+iso_url                 = "/home/share/Phone/ISO/26100.2161.241018-1636.GE_RELEASE_SVC_PROD3_CLIENTMULTI_X64FRE_ZH-CN.ISO"
+odt_url                 = "/home/share/Phone/ISO/2024.ODT_ZH-CN.ISO"
+iso_checksum            = "sha256:f6171a43b78615c439657f1745a529b0337615c0c05584ab21ca8ed88f290735"
+boot_command            = ["<enter><enter><enter><enter><enter><enter>"]

@@ -43,7 +43,7 @@ echo "root=${ROOT_PARTITION}" >> /mnt/etc/kernel/cmdline
 
 cat << 'EOF' > /mnt/etc/systemd/network/20-wired.network
 [Match]
-Name=enp*
+Name=e*
 
 [Network]
 DHCP=yes

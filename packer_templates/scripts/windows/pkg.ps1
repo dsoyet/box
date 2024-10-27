@@ -5,11 +5,13 @@ winget source remove msstore 2>&1>$null
 winget --version
 winget settings --enable LocalManifestFiles | out-null
 
-$Package = "PowerShell-7.4.6-win-x64.msi", "spice-vdagent-x64-0.10.0.msi", "wireguard-amd64-0.5.3.msi", "winfsp-2.1.24255.msi", "python-3.13.0-amd64.exe", "vagrant_2.4.1_windows_amd64.msi", "wsl.2.1.5.0.x64.msi", "QuickLook-3.7.3.msi", "openvpn-connect-3.5.0.3818_signed.msi", "adksetup.exe"
+$Package = "PowerShell-7.4.6-win-x64.msi", "spice-vdagent-x64-0.10.0.msi", "wireguard-amd64-0.5.3.msi", "winfsp-2.1.24255.msi", "python-3.13.0-amd64.exe", "vagrant_2.4.1_windows_amd64.msi", "wsl.2.1.5.0.x64.msi", "QuickLook-3.7.3.msi", "openvpn-connect-3.5.0.3818_signed.msi"
 foreach ( $pac in $Package){
     echo "Install $pac"
     Start-Process -WorkingDirectory "E:\pkg" -FilePath E:\pkg\$pac -ArgumentList '/quiet /norestart' -Wait
 }
+echo "Install adksetup.exe"
+Start-Process -WorkingDirectory "E:\pkg" -FilePath E:\pkg\adksetup.exe -ArgumentList '/quiet /norestart /layout "E:\pkg\Windows Kit\10\ADK"' -Wait
 
 $Package = "Git-2.47.0-64-bit.exe"
 foreach ( $pac in $Package){

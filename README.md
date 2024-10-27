@@ -51,8 +51,10 @@ packer build --only=qemu.vm -var-file=os_pkrvars/windows/11_EN-US-x86_64.pkrvars
 ```pwsh
 New-VMSwitch -Name "hyperv" -AllowManagementOS $True -NetAdapterName "Ethernet Instance 0"
 Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
+git clone https://gitee.com/xanflorp/box.git
+cd box
 packer init -upgrade ./packer_templates
-packer build --only=hyperv-iso.vm --var-file=os_pkrvars/deb/black.pkrvars.hcl packer_templates
+packer build --only=hyperv-iso.vm --var-file=os_pkrvars/deb/mint.pkrvars.hcl packer_templates
 ```
 
 ### Windows

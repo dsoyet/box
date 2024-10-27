@@ -27,8 +27,9 @@ echo "Install Zotero-7.0.8_x64_setup.exe"
 Start-Process -FilePath E:\pkg\Zotero-7.0.8_x64_setup.exe -ArgumentList '/S' -Wait
 # echo "Install PotPlayerSetup64.exe"
 # Start-Process -FilePath E:\pkg\PotPlayerSetup64.exe -ArgumentList '/S /D=C:\Program Files\PotPlayer' -Wait
-echo "Install astrill-setup-win.exe"
-Start-Process -FilePath E:\pkg\astrill-setup-win.exe -ArgumentList '/VERYSILENT /NOCANCEL /NORESTART /NOICONS /DIR="C:\Program Files (x86)\Proxy"' -Wait
+# Disable proxy for packer
+# echo "Install astrill-setup-win.exe"
+# Start-Process -FilePath E:\pkg\astrill-setup-win.exe -ArgumentList '/VERYSILENT /NOCANCEL /NORESTART /NOICONS /DIR="C:\Program Files (x86)\Proxy"' -Wait
 
 
 Set-Service -Name VirtioFsSvc -StartupType 'Automatic'

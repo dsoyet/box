@@ -52,10 +52,10 @@ locals {
               ] : (
               var.os_name == "ubuntu" || var.os_name == "black" || var.os_name == "mint" || var.os_name == "xfce4" ||
               var.os_name == "debian" ? [
-                "${path.root}/scripts/debian/update.sh",
+                "${path.root}/scripts/common/vagrant.sh",
+                "${path.root}/scripts/debian/apt.sh",
                 "${path.root}/scripts/common/motd.sh",
                 "${path.root}/scripts/common/sshd.sh",
-                "${path.root}/scripts/common/vagrant.sh",
                 "${path.root}/scripts/common/${var.os_name}.sh",
                 "${path.root}/scripts/debian/cleanup.sh",
                 "${path.root}/scripts/common/minimize.sh"

@@ -79,7 +79,7 @@ variable "hyperv_guest_additions_mode" {
 }
 variable "hyperv_switch_name" {
   type    = string
-  default = "bento"
+  default = "hyperv"
 }
 
 # qemu

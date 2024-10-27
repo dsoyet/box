@@ -1,6 +1,8 @@
 os_name                 = "windows"
 os_version              = "11"
 os_arch                 = "x86_64"
+os_image                = "Windows 11 Enterprise"
+os_lang                 = "en-US"
 is_windows              = true
 iso_url                 = "/home/share/Phone/ISO/26100.2161.241018-1636.GE_RELEASE_SVC_PROD3_CLIENTMULTI_X64FRE_EN-US.ISO"
 odt_url                 = "/home/share/Phone/ISO/2024.ODT_EN-US.ISO"

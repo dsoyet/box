@@ -8,7 +8,7 @@ switch ($edition) {
         Install-WindowsFeature Hyper-V -IncludeManagementTools -WarningAction SilentlyContinue
     }
     'Enterprise' {
-        Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRestart -WarningAction SilentlyContinue
+        # Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRestart -WarningAction SilentlyContinue
     }
     default {
         # Write-Output "$edition"

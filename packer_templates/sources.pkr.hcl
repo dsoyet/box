@@ -78,7 +78,7 @@ locals {
   ) : var.floppy_files
   http_directory = var.http_directory == null ? "${path.root}/http" : var.http_directory
   memory = var.memory == null ? (
-    var.is_windows || var.os_name == "macos" ? 4096 : 2048
+    var.is_windows || var.os_name == "macos" ? 10240 : 6144
   ) : var.memory
   output_directory = var.output_directory == null ? "/home/share/Downloads/${var.os_version}-${var.os_arch}" : var.output_directory
   shutdown_command = var.shutdown_command == null ? (

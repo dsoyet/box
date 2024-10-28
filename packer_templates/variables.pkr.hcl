@@ -169,7 +169,7 @@ variable "cd_content" {
 }
 variable "cpus" {
   type    = number
-  default = 2
+  default = 8
 }
 variable "cpu_model" {
   type    = string

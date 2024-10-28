@@ -50,7 +50,10 @@ locals {
               "${path.root}/scripts/common/sshd.sh",
               "${path.root}/scripts/common/minimize.sh"
               ] : (
-              var.os_name == "ubuntu" || var.os_name == "black" || var.os_name == "mint" || var.os_name == "xfce4" ||
+              var.os_name == "ubuntu" || 
+              var.os_name == "black" || 
+              var.os_name == "mint" || 
+              var.os_name == "xfce4" ||
               var.os_name == "debian" ? [
                 "${path.root}/scripts/common/vagrant.sh",
                 "${path.root}/scripts/debian/apt.sh",

@@ -45,7 +45,7 @@ You can use the following sample command to build a KVM/qemu Windows box:
 
 ```bash
 packer init -upgrade ./packer_templates
-packer build --only=qemu.vm -var-file=os_pkrvars/windows/11_EN-US-x86_64.pkrvars.hcl ./packer_templates
+packer build --only=qemu.vm --var-file=os_pkrvars/windows/11.pkrvars.hcl packer_templates
 ```
 
 ```pwsh
@@ -56,6 +56,25 @@ cd box
 packer init -upgrade ./packer_templates
 echo "done"
 packer build --only=hyperv-iso.vm --var-file=os_pkrvars/deb/mint.pkrvars.hcl packer_templates
+```
+
+```bash
+sed -i 's:\\u::g' $HOME/.bashrc
+sed -i 's/\(deb\|security\|ftp\).debian.org/mirrors.bfsu.edu.cn/g' /etc/apt/sources.list
+sed -i 's/\(archive\|security\).ubuntu.com/mirrors.bfsu.edu.cn/g'  /etc/apt/sources.list
+
+#Ubuntu
+cat << 'EOF' > /etc/wsl.conf
+[boot]
+systemd=true
+EOF
+
+
+
+```
+
+```pwsh
+Import-Certificate -FilePath "ArchWSL-AppX_24.4.28.0_x64.cer" -CertStoreLocation Cert:\LocalMachine\TrustedPeople -Confirm:$true
 ```
 
 ### Windows

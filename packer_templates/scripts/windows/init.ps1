@@ -1,6 +1,5 @@
 $ProgressPreference = 'SilentlyContinue'
 $ErrorActionPreference = 'Stop'
-# New-VMSwitch -Name "hyperv" -AllowManagementOS $True -NetAdapterName "Ethernet Instance 0"
 
 $edition = (Get-ComputerInfo).WindowsEditionId
 Write-Output "$edition"

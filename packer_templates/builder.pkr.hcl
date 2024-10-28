@@ -124,7 +124,7 @@ build {
   provisioner "powershell" {
     elevated_password = "vagrant"
     elevated_user     = "vagrant"
-    scripts           = "${path.root}/scripts/windows/init.ps1"
+    scripts           = ["${path.root}/scripts/windows/init.ps1"]
     except            = var.is_windows ? null : local.source_names
   }
   provisioner "windows-restart" {

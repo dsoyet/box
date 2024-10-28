@@ -42,7 +42,7 @@ if (Get-Command -ErrorAction SilentlyContinue Uninstall-WindowsFeature) {
     # for Windows Client.
     Set-MpPreference `
         -DisableRealtimeMonitoring $true `
-        -ExclusionPath @('C:\', 'D:\')
+        -ExclusionPath @('C:\', 'D:\', 'E:\', 'F:\')
     Set-ItemProperty `
         -Path 'HKLM:/SOFTWARE/Policies/Microsoft/Windows Defender' `
         -Name DisableAntiSpyware `

@@ -25,7 +25,6 @@ locals {
     var.is_windows ? [
       "${path.root}/scripts/windows/defender.ps1",
       "${path.root}/scripts/windows/update.ps1",
-      "${path.root}/scripts/windows/init.ps1",
       "${path.root}/scripts/windows/pkg.ps1",
       "${path.root}/scripts/windows/rule.ps1",
       "${path.root}/scripts/windows/openssh.ps1",

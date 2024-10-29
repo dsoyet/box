@@ -5,7 +5,7 @@ $edition = (Get-ComputerInfo).WindowsEditionId
 Write-Output "$edition"
 switch ($edition) {
     'ServerDatacenter' {
-        Install-WindowsFeature Hyper-V -IncludeManagementTools -WarningAction SilentlyContinue
+        # Install-WindowsFeature Hyper-V -IncludeManagementTools -WarningAction SilentlyContinue
     }
     'Enterprise' {
         # Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRestart -WarningAction SilentlyContinue

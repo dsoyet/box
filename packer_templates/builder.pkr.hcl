@@ -25,6 +25,7 @@ locals {
     var.is_windows ? [
       "${path.root}/scripts/windows/defender.ps1",
       "${path.root}/scripts/windows/update.ps1",
+      "${path.root}/scripts/windows/init.ps1",
       "${path.root}/scripts/windows/pkg.ps1",
       "${path.root}/scripts/windows/rule.ps1",
       "${path.root}/scripts/windows/openssh.ps1",
@@ -121,15 +122,6 @@ build {
   #   search_criteria = "IsInstalled=0"
   #   except          = var.is_windows ? null : local.source_names
   # }
-  provisioner "windows-restart" {
-    except = var.is_windows ? null : local.source_names
-  }
-  provisioner "powershell" {
-    elevated_password = "vagrant"
-    elevated_user     = "vagrant"
-    scripts           = ["${path.root}/scripts/windows/init.ps1"]
-    except            = var.is_windows ? null : local.source_names
-  }
   provisioner "windows-restart" {
     except = var.is_windows ? null : local.source_names
   }

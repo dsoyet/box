@@ -86,7 +86,7 @@ variable "hyperv_switch_name" {
 # qemu
 variable "qemu_accelerator" {
   type    = string
-  default = null
+  default = "kvm"
 }
 variable "qemu_binary" {
   type    = string

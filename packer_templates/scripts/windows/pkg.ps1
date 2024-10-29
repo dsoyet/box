@@ -1,7 +1,6 @@
 $ProgressPreference = 'SilentlyContinue'
 $ErrorActionPreference = 'Stop'
 
-Stop-Service wuauserv 2>&1>$null
 winget source remove msstore 2>&1>$null
 winget --version
 winget settings --enable LocalManifestFiles | out-null
@@ -34,4 +33,3 @@ Start-Process -FilePath E:\pkg\Zotero-7.0.8_x64_setup.exe -ArgumentList '/S' -Wa
 
 
 Set-Service -Name VirtioFsSvc -StartupType 'Automatic'
-Stop-Service wuauserv 2>&1>$null

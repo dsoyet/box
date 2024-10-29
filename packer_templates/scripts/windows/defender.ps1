@@ -34,6 +34,7 @@ trap {
     Exit 1
 }
 
+Stop-Service wuauserv 2>&1>$null
 Write-Host 'Disabling Windows Defender'
 if (Get-Command -ErrorAction SilentlyContinue Uninstall-WindowsFeature) {
     # for Windows Server.
@@ -48,3 +49,4 @@ if (Get-Command -ErrorAction SilentlyContinue Uninstall-WindowsFeature) {
         -Name DisableAntiSpyware `
         -Value 1
 }
+Stop-Service wuauserv 2>&1>$null

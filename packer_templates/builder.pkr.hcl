@@ -117,7 +117,6 @@ build {
     except            = var.is_windows ? local.source_names : null
   }
 
-  # Windows Updates
   # provisioner "windows-update" {
   #   search_criteria = "IsInstalled=0"
   #   except          = var.is_windows ? null : local.source_names

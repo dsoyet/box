@@ -1,5 +1,5 @@
 os_name                 = "windows"
-os_version              = "2025"
+os_version              = "2026"
 os_arch                 = "x86_64"
 os_image                = "Windows Server 2025 ServerDatacenter"
 os_lang                 = "en-US"

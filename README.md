@@ -77,6 +77,14 @@ EOF
 Import-Certificate -FilePath "ArchWSL-AppX_24.4.28.0_x64.cer" -CertStoreLocation Cert:\LocalMachine\TrustedPeople -Confirm:$true
 ```
 
+```pwsh
+echo "Install PotPlayerSetup64.exe"
+Start-Process -FilePath E:\pkg\PotPlayerSetup64.exe -ArgumentList '/S /D=C:\Program Files\PotPlayer' -Wait
+Disable proxy for Packer
+echo "Install astrill-setup-win.exe"
+Start-Process -FilePath E:\pkg\astrill-setup-win.exe -ArgumentList '/VERYSILENT /NOCANCEL /NORESTART /NOICONS /DIR="C:\Program Files (x86)\Proxy"' -Wait
+```
+
 ### Windows
 
 ```powershell

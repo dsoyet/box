@@ -26,17 +26,19 @@ foreach ( $pac in $Package){
     Start-Process -WorkingDirectory "E:\pkg" -FilePath E:\pkg\$pac -ArgumentList '/VERYSILENT /NORESTART' -Wait
 }
 
+cd C:\Windows\System32
+tar x -f E:\pkg\chezmoi_2.53.1_windows_amd64.zip chezmoi.exe
+tar x -f E:\pkg\packer_1.11.2_windows_amd64.zip  packer.exe
+
+copy E:\pkg\wsl.2.1.5.0.x64.msi C:\Users\vagrant\Downloads
+copy E:\pkg\Ubuntu2404-240425.AppxBundle C:\Users\vagrant\Downloads
+
 echo "Install VSCodeUserSetup-x64-1.94.2.exe"
 Start-Process -FilePath E:\pkg\VSCodeUserSetup-x64-1.94.2.exe -ArgumentList '/VERYSILENT /NORESTART /mergetasks=!runcode' -Wait
 echo "Install SumatraPDF-3.5.2-64-install.exe"
 Start-Process -FilePath E:\pkg\SumatraPDF-3.5.2-64-install.exe -ArgumentList '-install -s' -Wait
 echo "Install Zotero-7.0.8_x64_setup.exe"
 Start-Process -FilePath E:\pkg\Zotero-7.0.8_x64_setup.exe -ArgumentList '/S' -Wait
-# echo "Install PotPlayerSetup64.exe"
-# Start-Process -FilePath E:\pkg\PotPlayerSetup64.exe -ArgumentList '/S /D=C:\Program Files\PotPlayer' -Wait
-# Disable proxy for packer
-# echo "Install astrill-setup-win.exe"
-# Start-Process -FilePath E:\pkg\astrill-setup-win.exe -ArgumentList '/VERYSILENT /NOCANCEL /NORESTART /NOICONS /DIR="C:\Program Files (x86)\Proxy"' -Wait
 
 
 Set-Service -Name VirtioFsSvc -StartupType 'Automatic'

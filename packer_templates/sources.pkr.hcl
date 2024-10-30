@@ -54,12 +54,12 @@ locals {
   cd_content = var.cd_content == null ? (
     var.is_windows ? (
       var.hyperv_generation == 2 ? {
-        "AutoUnattend.xml" = templatefile("http/windows/${var.os_version}.xml", { image = var.os_image, lang = var.os_lang })
+        "AutoUnattend.xml" = templatefile("http/windows/${var.os_version}.xml", { image = var.os_image, lang = var.os_lang, build_version  = var.build_version })
         } : (
         var.os_arch == "x86_64" ? {
-        "AutoUnattend.xml" = templatefile("http/windows/${var.os_version}.xml", { image = var.os_image, lang = var.os_lang })
+        "AutoUnattend.xml" = templatefile("http/windows/${var.os_version}.xml", { image = var.os_image, lang = var.os_lang, build_version  = var.build_version  })
         } : {
-        "AutoUnattend.xml" = templatefile("http/windows/${var.os_version}.xml", { image = var.os_image, lang = var.os_lang })
+        "AutoUnattend.xml" = templatefile("http/windows/${var.os_version}.xml", { image = var.os_image, lang = var.os_lang, build_version  = var.build_version  })
         }
       )
     ) : null

@@ -8,6 +8,11 @@ variable "os_version" {
   default     = "2025"
   description = "OS version number"
 }
+variable "build_version" {
+  type        = string
+  default     = null
+  description = "OS build number"
+}
 variable "os_image" {
   type        = string
   default     = "Windows Server 2025 ServerDatacenter"

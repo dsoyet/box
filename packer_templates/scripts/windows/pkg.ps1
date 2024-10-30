@@ -34,8 +34,8 @@ tar x -f E:\pkg\packer_1.11.2_windows_amd64.zip  packer.exe
 
 echo "Install wsl.2.1.5.0.x64.msi"
 copy E:\pkg\wsl.2.1.5.0.x64.msi C:\Users\vagrant\Downloads
-echo "Install Ubuntu2404-240425.AppxBundle"
-copy E:\pkg\Ubuntu2404-240425.AppxBundle C:\Users\vagrant\Downloads
+echo "Install Ubuntu2204-220117.appx"
+copy E:\pkg\Ubuntu2204-220117.appx C:\Users\vagrant\Downloads
 
 echo "Install VSCodeUserSetup-x64-1.94.2.exe"
 Start-Process -FilePath E:\pkg\VSCodeUserSetup-x64-1.94.2.exe -ArgumentList '/VERYSILENT /NORESTART /mergetasks=!runcode' -Wait

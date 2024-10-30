@@ -7,5 +7,5 @@ os_lang                 = "zh-CN"
 is_windows              = true
 iso_url                 = "/osx/Users/Share/Phone/X23-81954_26100.1742.240906-0331.ge_release_svc_refresh_SERVER_OEMRET_x64FRE_zh-cn.iso"
 odt_url                 = "/osx/Users/Share/Phone/2024.ODT_ZH-CN.ISO"
-iso_checksum            = "sha256:5b2c5b3b7ead8089216f40c6ad002ee69616daa49bfc98e2c7d2a459708cc949"
+iso_checksum            = "sha256:0de6382734c7e6174a163f0ef8f2ef956c77305a74584e0e1328546e81eb521a"
 boot_command            = ["<enter><enter><enter><enter><enter><enter>"]

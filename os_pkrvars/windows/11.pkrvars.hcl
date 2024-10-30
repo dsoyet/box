@@ -1,5 +1,6 @@
 os_name                 = "windows"
 os_version              = "11"
+build_version           = "10.0.26100.2161"
 os_arch                 = "x86_64"
 os_image                = "Windows 11 Enterprise"
 os_lang                 = "en-US"

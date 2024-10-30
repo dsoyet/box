@@ -6,5 +6,5 @@ os_lang                 = "en-US"
 is_windows              = true
 iso_url                 = "/osx/Users/Share/Phone/X23-81958_26100.1742.240906-0331.ge_release_svc_refresh_SERVER_OEMRET_x64FRE_en-us.iso"
 odt_url                 = "/osx/Users/Share/Phone/2024.ODT_EN-US.ISO"
-iso_checksum            = "sha256:ec9011bc54f0fdbe33b43c682eeeb36fb455717eaefe385bba1675fb9967da06"
+iso_checksum            = "sha256:854109e1f215a29fc3541188297a6ca97c8a8f0f8c4dd6236b78dfdf845bf75e"
 boot_command            = ["<enter><enter><enter><enter><enter><enter>"]

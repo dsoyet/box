@@ -4,7 +4,11 @@
 HOME_DIR="${HOME_DIR:-/home/vagrant}";
 
 mkdir -p $HOME_DIR/.ssh;
-sed -i 's:\\u::g' $HOME_DIR/.bashrc
+sed -i 's:\\u::g' $HOME_DIR/.bashrc /etc/bashrc
+
+# keylin sshd
+sed -i -e 's/AllowTcpForwarding no/AllowTcpForwarding yes/g' -e 's/X11Forwarding no/X11Forwarding yes/g' -e 's/AllowAgentForwarding no/AllowAgentForwarding yes/g' /etc/ssh/sshd_config
+truncate -s 0 /etc/motd
 
 # password-less sudo
 echo 'vagrant ALL=(ALL) NOPASSWD:ALL' >/etc/sudoers.d/99_vagrant;

@@ -71,7 +71,6 @@ EOF
 
 
 RmDHVxkSw5FH7ATx
-https://mirrors.jlu.edu.cn/rocky/8.10/isos/x86_64/Rocky-8.10-x86_64-dvd1.iso
 ```
 
 ```pwsh

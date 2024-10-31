@@ -75,6 +75,9 @@ EOF
 
 ```pwsh
 Import-Certificate -FilePath "ArchWSL-AppX_24.4.28.0_x64.cer" -CertStoreLocation Cert:\LocalMachine\TrustedPeople -Confirm:$true
+
+winget source remove winget
+winget source add winget https://mirrors.cernet.edu.cn/winget-source --trust-level trusted
 ```
 
 ```pwsh

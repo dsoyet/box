@@ -65,7 +65,7 @@ locals {
                 "${path.root}/scripts/common/minimize.sh"
                 ] : (
                 var.os_name == "fedora" ? [
-                  "${path.root}/scripts/fedora/networking_fedora.sh",
+                  "${path.root}/scripts/common/vagrant.sh",
                   "${path.root}/scripts/common/motd.sh",
                   "${path.root}/scripts/common/minimize.sh"
                   ] : (

@@ -4,11 +4,17 @@
 HOME_DIR="${HOME_DIR:-/home/vagrant}";
 
 mkdir -p $HOME_DIR/.ssh;
-sed -i 's:\\u::g' $HOME_DIR/.bashrc /etc/bashrc
+sed -i 's:\\u::g' $HOME_DIR/.bashrc 
+# for rocky and centos
+[ -f "/etc/bash.bashrc" ] && sed -i 's:\\u::g' /etc/bash.bashrc
+[ -f "/etc/bashrc" ] && sed -i 's:\\u::g' /etc/bashrc
 
 # keylin sshd
-sed -i -e 's/AllowTcpForwarding no/AllowTcpForwarding yes/g' -e 's/X11Forwarding no/X11Forwarding yes/g' -e 's/AllowAgentForwarding no/AllowAgentForwarding yes/g' /etc/ssh/sshd_config
-truncate -s 0 /etc/motd
+test -f "/etc/motd" && truncate -s 0 /etc/motd
+
+if [ -f /etc/ssh/sshd_config ]; then
+    sed -i -e 's/AllowTcpForwarding no/AllowTcpForwarding yes/g' -e 's/X11Forwarding no/X11Forwarding yes/g' -e 's/AllowAgentForwarding no/AllowAgentForwarding yes/g' /etc/ssh/sshd_config
+fi
 
 # password-less sudo
 echo 'vagrant ALL=(ALL) NOPASSWD:ALL' >/etc/sudoers.d/99_vagrant;

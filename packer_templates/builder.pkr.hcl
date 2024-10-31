@@ -44,10 +44,11 @@ locals {
             "${path.root}/scripts/freebsd/minimize_freebsd.sh"
             ] : (
             var.os_name == "opensuse-leap" ||
+            var.os_name == "tumbleweed" ||
             var.os_name == "sles" ? [
-              "${path.root}/scripts/suse/update_suse.sh",
+              "${path.root}/scripts/common/${var.os_name}.sh",
+              "${path.root}/scripts/common/vagrant.sh",
               "${path.root}/scripts/common/motd.sh",
-              "${path.root}/scripts/common/sshd.sh",
               "${path.root}/scripts/common/minimize.sh"
               ] : (
               var.os_name == "ubuntu" || 
@@ -75,7 +76,6 @@ locals {
                     ] : [
                     "${path.root}/scripts/common/vagrant.sh",
                     "${path.root}/scripts/common/motd.sh",
-                    "${path.root}/scripts/common/sshd.sh",
                     "${path.root}/scripts/common/minimize.sh"
                   ]
                 )

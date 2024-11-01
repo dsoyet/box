@@ -5,7 +5,10 @@ HOME_DIR="${HOME_DIR:-/home/vagrant}";
 [ -f "/etc/os-release" ] && . /etc/os-release 
 
 mkdir -p $HOME_DIR/.ssh;
-[ -f "$HOME_DIR/.bashrc" ] && sed -i 's:\\u::g' $HOME_DIR/.bashrc 
+if [ -f $HOME_DIR/.bashrc ]; then
+    sed -i 's:\\u::g' $HOME_DIR/.bashrc 
+    echo "PS1='[@\h \W]\$ '" >> $HOME_DIR/.bashrc 
+fi
 # for rocky and centos
 [ -f "/etc/bash.bashrc" ] && sed -i 's:\\u::g' /etc/bash.bashrc
 [ -f "/etc/bashrc" ] && sed -i 's:\\u::g' /etc/bashrc

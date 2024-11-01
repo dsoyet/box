@@ -28,7 +28,7 @@ HOSTNAME=freebsd
 ifdev=$(ifconfig | grep '^[a-z]' | cut -d: -f1 | head -n 1)
 # Enable required services
 cat >> /etc/rc.conf << EOT
-ifconfig_${ifdev}="dhcp"
+ifconfig_${ifdev}="DHCP -rxcsum"
 sshd_enable="YES"
 EOT
 
@@ -38,7 +38,12 @@ vm.kmem_size="200M"
 vm.kmem_size_max="200M"
 vfs.zfs.arc_max="40M"
 vfs.zfs.vdev.cache.size="5M"
-autoboot_delay=3
+autoboot_delay=1
+virtio_load="YES"
+virtio_pci_load="YES"
+virtio_blk_load="YES"
+if_vtnet_load="YES"
+virtio_balloon_load="YES"
 EOT
 
 # zfs doesn't use an fstab, but some rc scripts expect one
@@ -56,7 +61,7 @@ else
 fi
 
 # Set up user accounts
-echo "vagrant" | pw -V /etc useradd vagrant -h 0 -s /bin/sh -G wheel -d ${home_base}/vagrant -c "Vagrant User"
+echo "vagrant" | pw -V /etc useradd vagrant -h 0 -s /bin/sh -G wheel -d ${home_base}/vagrant -c "Lattice Sum"
 echo "vagrant" | pw -V /etc usermod root
 
 mkdir -p ${home_base}/vagrant

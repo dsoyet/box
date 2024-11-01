@@ -113,7 +113,7 @@ source "hyperv-iso" "vm" {
   headless         = var.headless
   http_directory   = local.http_directory
   iso_checksum     = var.iso_checksum
-  iso_url          = var.iso_url
+  iso_urls         = var.iso_urls
   memory           = local.memory
   output_directory = "${local.output_directory}-hyperv"
   shutdown_command = local.shutdown_command
@@ -154,7 +154,7 @@ source "qemu" "vm" {
   headless         = var.headless
   http_directory   = local.http_directory
   iso_checksum     = var.iso_checksum
-  iso_url          = var.iso_url
+  iso_urls         = var.iso_urls
   memory           = local.memory
   output_directory = "${local.output_directory}-qemu"
   shutdown_command = local.shutdown_command

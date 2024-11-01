@@ -206,8 +206,8 @@ variable "iso_checksum" {
   default     = null
   description = "ISO download checksum"
 }
-variable "iso_url" {
-  type        = string
+variable "iso_urls" {
+  type        = list(string)
   default     = null
   description = "ISO download url"
 }

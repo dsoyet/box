@@ -39,9 +39,8 @@ locals {
           "${path.root}/scripts/solaris/minimize_solaris.sh"
           ] : (
           var.os_name == "freebsd" ? [
-            "${path.root}/scripts/freebsd/update_freebsd.sh",
-            "${path.root}/scripts/common/vagrant.sh",
-            "${path.root}/scripts/freebsd/minimize_freebsd.sh"
+            "${path.root}/scripts/common/${var.os_name}.sh",
+            "${path.root}/scripts/common/vagrant.sh"
             ] : (
             var.os_name == "opensuse-leap" ||
             var.os_name == "tumbleweed" ||

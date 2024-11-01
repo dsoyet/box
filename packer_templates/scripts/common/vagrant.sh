@@ -4,7 +4,8 @@
 HOME_DIR="${HOME_DIR:-/home/vagrant}";
 
 mkdir -p $HOME_DIR/.ssh;
-sed -i 's:\\u::g' $HOME_DIR/.bashrc 
+# freebsd
+[ -f "$HOME_DIR/.bashrc" ] && sed -i 's:\\u::g' $HOME_DIR/.bashrc 
 # for rocky and centos
 [ -f "/etc/bash.bashrc" ] && sed -i 's:\\u::g' /etc/bash.bashrc
 [ -f "/etc/bashrc" ] && sed -i 's:\\u::g' /etc/bashrc
@@ -13,7 +14,9 @@ sed -i 's:\\u::g' $HOME_DIR/.bashrc
 test -f "/etc/motd" && truncate -s 0 /etc/motd
 
 if [ -f /etc/ssh/sshd_config ]; then
-    sed -i -e 's/AllowTcpForwarding no/AllowTcpForwarding yes/g' -e 's/X11Forwarding no/X11Forwarding yes/g' -e 's/AllowAgentForwarding no/AllowAgentForwarding yes/g' /etc/ssh/sshd_config
+    sed -i 's/AllowTcpForwarding no/AllowTcpForwarding yes/g' /etc/ssh/sshd_config
+    sed -i 's/X11Forwarding no/X11Forwarding yes/g' /etc/ssh/sshd_config
+    sed -i 's/AllowAgentForwarding no/AllowAgentForwarding yes/g' /etc/ssh/sshd_config
 fi
 
 # password-less sudo

@@ -34,9 +34,7 @@ locals {
         "${path.root}/scripts/common/archlinux.sh"
         ] : (
         var.os_name == "solaris" ? [
-          "${path.root}/scripts/solaris/update_solaris.sh",
-          "${path.root}/scripts/common/vagrant.sh",
-          "${path.root}/scripts/solaris/minimize_solaris.sh"
+          "${path.root}/scripts/common/vagrant.sh"
           ] : (
           var.os_name == "freebsd" ? [
             "${path.root}/scripts/common/${var.os_name}.sh",

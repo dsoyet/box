@@ -1,29 +1,18 @@
 DISTRIBUTIONS="base.txz kernel.txz"
-if [ `uname -m` = "amd64" ]; then
-  DISTRIBUTIONS="${DISTRIBUTIONS} lib32.txz"
-fi
+PARTITIONS=DEFAULT
 
-# hyperv da0
-# vbox ada0
-# libvirt vtbd0
-[ -e /dev/vtbd0 ] && DISKSLICE=vtbd0
-[ -e /dev/da0 ]   && DISKSLICE=da0
-
-# Workaround for https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=203777
-export nonInteractive="YES"
-
-export ZFSBOOT_DISKS="$DISKSLICE"
 export ZFSBOOT_CONFIRM_LAYOUT=0
-
-HOSTNAME=freebsd
+export ZFSBOOT_DISKS="vtbd0"
+export nonInteractive="YES"
 
 #!/bin/sh -x
 
-ifdev=$(ifconfig | grep '^[a-z]' | cut -d: -f1 | head -n 1)
 # -rxcsum for vtnet0
 cat >> /etc/rc.conf << EOT
-ifconfig_${ifdev}="DHCP -rxcsum"
+ifconfig_DEFAULT="DHCP -rxcsum"
 sshd_enable="YES"
+dbus_enable="YES"
+hostname="freebsd"
 EOT
 
 # Tune and boot from zfs
@@ -35,8 +24,15 @@ vfs.zfs.vdev.cache.size="5M"
 autoboot_delay=1
 EOT
 
-# zfs doesn't use an fstab, but some rc scripts expect one
-touch /etc/fstab
+mkdir -p /usr/local/etc/pkg/repos
+cat >> /usr/local/etc/pkg/repos/FreeBSD.conf << 'EOT'
+FreeBSD: {
+  url: "http://mirrors.ustc.edu.cn/freebsd-pkg/${ABI}/quarterly",
+  mirror_type: "none",
+}
+EOT
+
+echo "proc                    /proc   procfs  rw              0       0" >> /etc/fstab
 
 # Since FreeBSD 14.0 bsdinstall again creates dataset for /home rather then /usr/home
 # Thus on versions prior to 14.0 we have to create /home -> /usr/home symlink,
@@ -56,4 +52,5 @@ echo "vagrant" | pw -V /etc usermod root
 mkdir -p ${home_base}/vagrant
 chown 1001:1001 ${home_base}/vagrant
 
+efibootmgr -n -b 0002
 reboot

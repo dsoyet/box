@@ -71,9 +71,16 @@ EOF
 
 
 RmDHVxkSw5FH7ATx
+magnet:?xt=urn:btih:4AA127CDE2E77F9B3E85408758380A3FE76EB53F
 
 #bsd
 sed -i '' 's/#EnableFuseMount=false/EnableFuseMount=false/g' /usr/local/etc/xrdp/sesman.ini
+```
+
+### FreeBSD
+```sh
+https://rockyhotas.github.io/unix/2019/02/27/freebsd-kernel-modules.html
+sysctl kern.module_path
 ```
 
 ```pwsh

@@ -9,7 +9,22 @@ FreeBSD: {
 }
 EOT
 
-pkg install -y vim
+pkg install -y sudo bash vim xorg xfce xrdp
+
+pw usermod vagrant -s /usr/local/bin/bash
+sysrc xrdp_enable="YES"
+sysrc xrdp_sesman_enable="YES"
+cat >> /usr/local/etc/X11/xorg.conf.d/driver.conf << 'EOT'
+Section "Device"
+    Identifier "Card0"
+    Driver     "scfb"
+EndSection
+EOT
+
+sed -i '' 's/# exec startxfce4/exec startxfce4/g' /usr/local/etc/xrdp/startwm.sh
+sed -i '' 's/exec xterm/# exec xterm/g' /usr/local/etc/xrdp/startwm.sh
+# sed -i '' 's/#delay_ms=2000/delay_ms=2000/g' /usr/local/etc/xrdp/xrdp.ini
+sed -i '' 's/#EnableFuseMount=false/EnableFuseMount=false/g' /usr/local/etc/xrdp/sesman.ini
 
 pkg autoremove --yes && pkg clean --yes --all
 rm -rf /var/db/pkg/repos/FreeBSD

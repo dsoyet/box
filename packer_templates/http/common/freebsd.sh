@@ -1,4 +1,8 @@
 DISTRIBUTIONS="base.txz kernel.txz"
+if [ `uname -m` = "amd64" ]; then
+  DISTRIBUTIONS="${DISTRIBUTIONS} lib32.txz"
+fi
+
 export ZFSBOOT_CONFIRM_LAYOUT=0
 export ZFSBOOT_DISKS="vtbd0"
 export nonInteractive="YES"

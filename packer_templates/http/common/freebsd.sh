@@ -3,17 +3,11 @@ if [ `uname -m` = "amd64" ]; then
   DISTRIBUTIONS="${DISTRIBUTIONS} lib32.txz"
 fi
 
-# for variations in the root disk device name between VMware and Virtualbox
-if [ -e /dev/ada0 ]; then
-  DISKSLICE=ada0
-elif [ -e /dev/da0 ]; then
-  DISKSLICE=da0
-elif [ -e /dev/vtbd0 ]; then
-  DISKSLICE=vtbd0
-else
-  echo "Unknown disk for install.sh to work with!"
-  exit -1
-fi
+# hyperv da0
+# vbox ada0
+# libvirt vtbd0
+[ -e /dev/vtbd0 ] && DISKSLICE=vtbd0
+[ -e /dev/da0 ]   && DISKSLICE=da0
 
 # Workaround for https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=203777
 export nonInteractive="YES"
@@ -26,7 +20,7 @@ HOSTNAME=freebsd
 #!/bin/sh -x
 
 ifdev=$(ifconfig | grep '^[a-z]' | cut -d: -f1 | head -n 1)
-# Enable required services
+# -rxcsum for vtnet0
 cat >> /etc/rc.conf << EOT
 ifconfig_${ifdev}="DHCP -rxcsum"
 sshd_enable="YES"
@@ -39,11 +33,6 @@ vm.kmem_size_max="200M"
 vfs.zfs.arc_max="40M"
 vfs.zfs.vdev.cache.size="5M"
 autoboot_delay=1
-virtio_load="YES"
-virtio_pci_load="YES"
-virtio_blk_load="YES"
-if_vtnet_load="YES"
-virtio_balloon_load="YES"
 EOT
 
 # zfs doesn't use an fstab, but some rc scripts expect one

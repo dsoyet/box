@@ -71,6 +71,9 @@ EOF
 
 
 RmDHVxkSw5FH7ATx
+
+#bsd
+sed -i '' 's/#EnableFuseMount=false/EnableFuseMount=false/g' /usr/local/etc/xrdp/sesman.ini
 ```
 
 ```pwsh

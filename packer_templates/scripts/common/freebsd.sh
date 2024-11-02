@@ -23,7 +23,6 @@ EOT
 
 sed -i '' 's/# exec startxfce4/exec startxfce4/g' /usr/local/etc/xrdp/startwm.sh
 sed -i '' 's/exec xterm/# exec xterm/g' /usr/local/etc/xrdp/startwm.sh
-# sed -i '' 's/#delay_ms=2000/delay_ms=2000/g' /usr/local/etc/xrdp/xrdp.ini
 sed -i '' 's/#EnableFuseMount=false/EnableFuseMount=false/g' /usr/local/etc/xrdp/sesman.ini
 
 pkg autoremove --yes && pkg clean --yes --all

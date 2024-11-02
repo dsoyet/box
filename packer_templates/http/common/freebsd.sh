@@ -1,11 +1,8 @@
 DISTRIBUTIONS="base.txz kernel.txz"
-if [ `uname -m` = "amd64" ]; then
-  DISTRIBUTIONS="${DISTRIBUTIONS} lib32.txz"
-fi
 
-export ZFSBOOT_CONFIRM_LAYOUT=0
 export ZFSBOOT_DISKS="vtbd0"
 export nonInteractive="YES"
+export ZFSBOOT_CONFIRM_LAYOUT=0
 
 #!/bin/sh -x
 
@@ -13,7 +10,6 @@ export nonInteractive="YES"
 cat >> /etc/rc.conf << EOT
 ifconfig_DEFAULT="DHCP -rxcsum"
 sshd_enable="YES"
-hostname="freebsd"
 EOT
 
 # Tune and boot from zfs

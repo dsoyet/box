@@ -1,6 +1,4 @@
 DISTRIBUTIONS="base.txz kernel.txz"
-PARTITIONS=DEFAULT
-
 export ZFSBOOT_CONFIRM_LAYOUT=0
 export ZFSBOOT_DISKS="vtbd0"
 export nonInteractive="YES"
@@ -11,7 +9,6 @@ export nonInteractive="YES"
 cat >> /etc/rc.conf << EOT
 ifconfig_DEFAULT="DHCP -rxcsum"
 sshd_enable="YES"
-dbus_enable="YES"
 hostname="freebsd"
 EOT
 
@@ -22,14 +19,6 @@ vm.kmem_size_max="200M"
 vfs.zfs.arc_max="40M"
 vfs.zfs.vdev.cache.size="5M"
 autoboot_delay=1
-EOT
-
-mkdir -p /usr/local/etc/pkg/repos
-cat >> /usr/local/etc/pkg/repos/FreeBSD.conf << 'EOT'
-FreeBSD: {
-  url: "http://mirrors.ustc.edu.cn/freebsd-pkg/${ABI}/quarterly",
-  mirror_type: "none",
-}
 EOT
 
 echo "proc                    /proc   procfs  rw              0       0" >> /etc/fstab

@@ -9,4 +9,7 @@ FreeBSD: {
 }
 EOT
 
-pkg install -y sudo vim xorg xfce xrdp xorgxrdp
+pkg install -y vim
+
+pkg autoremove --yes && pkg clean --yes --all
+rm -rf /var/db/pkg/repos/FreeBSD

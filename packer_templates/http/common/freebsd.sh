@@ -1,22 +1,9 @@
 DISTRIBUTIONS="base.txz kernel.txz"
 
-# for variations in the root disk device name between VMware and Virtualbox
-if [ -e /dev/ada0 ]; then
-  DISKSLICE=ada0
-elif [ -e /dev/da0 ]; then
-  DISKSLICE=da0
-elif [ -e /dev/vtbd0 ]; then
-  DISKSLICE=vtbd0
-else
-  echo "Unknown disk for install.sh to work with!"
-  exit -1
-fi
-
-# Workaround for https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=203777
 export nonInteractive="YES"
-
-export ZFSBOOT_DISKS="$DISKSLICE"
+export ZFSBOOT_DISKS="vtbd0"
 export ZFSBOOT_CONFIRM_LAYOUT=0
+# PARTITIONS="vtbd0 gpt {	125G freebsd-ufs /, 2G freebsd-swap }"
 
 HOSTNAME=freebsd
 

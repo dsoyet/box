@@ -93,6 +93,7 @@ beadm/bectl
 idprio/rtprio
 
 #lsblk
+sudo camcontrol devlist
 geom disk list
 gpart show
 ```

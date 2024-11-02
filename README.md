@@ -81,6 +81,20 @@ sed -i '' 's/#EnableFuseMount=false/EnableFuseMount=false/g' /usr/local/etc/xrdp
 ```sh
 https://rockyhotas.github.io/unix/2019/02/27/freebsd-kernel-modules.html
 sysctl kern.module_path
+
+#nice FreeBSD tools 
+sockstat
+gstat
+top -b -o res
+top -m io -o total
+usbconfig
+rcorder
+beadm/bectl
+idprio/rtprio
+
+#lsblk
+geom disk list
+gpart show
 ```
 
 ```pwsh

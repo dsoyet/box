@@ -1,15 +1,33 @@
 DISTRIBUTIONS="base.txz kernel.txz"
 
-export ZFSBOOT_DISKS="vtbd0"
+# for variations in the root disk device name between VMware and Virtualbox
+if [ -e /dev/ada0 ]; then
+  DISKSLICE=ada0
+elif [ -e /dev/da0 ]; then
+  DISKSLICE=da0
+elif [ -e /dev/vtbd0 ]; then
+  DISKSLICE=vtbd0
+else
+  echo "Unknown disk for install.sh to work with!"
+  exit -1
+fi
+
+# Workaround for https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=203777
 export nonInteractive="YES"
+
+export ZFSBOOT_DISKS="$DISKSLICE"
 export ZFSBOOT_CONFIRM_LAYOUT=0
+
+HOSTNAME=freebsd
 
 #!/bin/sh -x
 
-# -rxcsum for vtnet0
+ifdev=$(ifconfig | grep '^[a-z]' | cut -d: -f1 | head -n 1)
+# Enable required services
 cat >> /etc/rc.conf << EOT
-ifconfig_DEFAULT="DHCP -rxcsum"
+ifconfig_${ifdev}="DHCP -rxcsum"
 sshd_enable="YES"
+hostname="freebsd"
 EOT
 
 # Tune and boot from zfs

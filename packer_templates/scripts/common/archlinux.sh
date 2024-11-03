@@ -92,9 +92,14 @@ cat <<-EOF > "/mnt${CONFIG_SCRIPT}"
 EOF
 arch-chroot /mnt ${CONFIG_SCRIPT}
 
-cat << 'EOF' > /mnt/etc/sudoers.d/10_vagrant
+cat << 'EOF' > /mnt/etc/sudoers.d/64_vagrant
 Defaults env_keep += "SSH_AUTH_SOCK"
 vagrant ALL=(ALL) NOPASSWD: ALL
+EOF
+
+cat << 'EOF' > /mnt/etc/pacman.d/mirrorlist
+# Server
+Server = https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch
 EOF
 
 export HOME_DIR=/mnt/home/vagrant

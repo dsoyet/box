@@ -71,7 +71,7 @@ EOF
 
 
 RmDHVxkSw5FH7ATx
-magnet:?xt=urn:btih:4AA127CDE2E77F9B3E85408758380A3FE76EB53F
+Django + alpine.js + htmx
 
 #bsd
 sed -i '' 's/#EnableFuseMount=false/EnableFuseMount=false/g' /usr/local/etc/xrdp/sesman.ini

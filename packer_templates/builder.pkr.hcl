@@ -30,8 +30,9 @@ locals {
       "${path.root}/scripts/windows/rule.ps1",
       "${path.root}/scripts/windows/openssh.ps1",
       ] : (
-      var.os_name == "archlinux" ? [
-        "${path.root}/scripts/common/archlinux.sh"
+      var.os_name == "archlinux" ||
+      var.os_name == "nix" ? [
+        "${path.root}/scripts/common/${var.os_name}.sh"
         ] : (
         var.os_name == "solaris" ? [
           "${path.root}/scripts/common/vagrant.sh"

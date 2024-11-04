@@ -72,6 +72,9 @@ EOF
 
 RmDHVxkSw5FH7ATx
 Django + alpine.js + htmx
+$ { sleep 10; ls /; } | nc termbin.com 9999
+$ { sleep 10; ls /; } | nc paste.c-net.org 9999
+https://paste.c-net.org/ExampleOne
 
 #bsd
 sed -i '' 's/#EnableFuseMount=false/EnableFuseMount=false/g' /usr/local/etc/xrdp/sesman.ini

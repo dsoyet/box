@@ -76,6 +76,13 @@ $ { sleep 10; ls /; } | nc termbin.com 9999
 $ { sleep 10; ls /; } | nc paste.c-net.org 9999
 https://paste.c-net.org/ExampleOne
 
+sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+
+nix-channel --add https://mirrors.nju.edu.cn/nix-channels/nixpkgs-unstable nixpkgs
+nix-channel --update
+
+substituters = https://mirrors.cernet.edu.cn/nix-channels/store https://cache.nixos.org/
+
 #bsd
 sed -i '' 's/#EnableFuseMount=false/EnableFuseMount=false/g' /usr/local/etc/xrdp/sesman.ini
 ```

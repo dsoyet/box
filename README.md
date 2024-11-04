@@ -77,9 +77,14 @@ $ { sleep 10; ls /; } | nc paste.c-net.org 9999
 https://paste.c-net.org/ExampleOne
 
 sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+sudo ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+sudo systemctl start nix-daemon.service
 
 nix-channel --add https://mirrors.nju.edu.cn/nix-channels/nixpkgs-unstable nixpkgs
 nix-channel --update
+
+nix-env -iA nixpkgs.hello
+
 
 substituters = https://mirrors.cernet.edu.cn/nix-channels/store https://cache.nixos.org/
 

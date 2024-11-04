@@ -57,7 +57,7 @@ pacstrap /mnt ${PKGS}
 install --mode=0755 /dev/null "/mnt${CONFIG_SCRIPT}"
 genfstab -U /mnt >> /mnt/etc/fstab
 cat <<-EOF > "/mnt${CONFIG_SCRIPT}"
-  echo 'example' > /etc/hostname
+  echo 'arch' > /etc/hostname
   ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
   sed -i 's/#en_US.UTF-8/en_US.UTF-8/' /etc/locale.gen
   locale-gen
@@ -68,6 +68,7 @@ cat <<-EOF > "/mnt${CONFIG_SCRIPT}"
   # systemctl enable dhcpcd@eth0.service systemd-resolved.service
 
   systemctl enable systemd-networkd.service systemd-resolved.service
+  ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 
   sed -i 's/#UseDNS yes/UseDNS no/' /etc/ssh/sshd_config
   systemctl enable sshd #rngd vmtoolsd rpcbind

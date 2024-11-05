@@ -82,6 +82,8 @@ sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 sudo ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 sudo systemctl start nix-daemon.service
 
+PROMPT_COLOR="1;31m"; ((UID)) && PROMPT_COLOR="1;32m"; export PS1="\[\033[$PROMPT_COLOR\][@\h:\w]\\$\[\033[0m\] "
+
 nix-channel --add https://mirrors.nju.edu.cn/nix-channels/nixpkgs-unstable nixpkgs
 nix-channel --update
 

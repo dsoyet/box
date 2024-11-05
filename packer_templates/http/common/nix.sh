@@ -22,9 +22,10 @@ set 1 esp on
 quit
 EOF
 
-mkfs.ext4 ${ROOT_PARTITION} -L NIXROOT
+# mkfs.ext4 ${ROOT_PARTITION} -L NIXROOT
+mkfs.ext4 ${ROOT_PARTITION}
 mkfs.fat -F 32 /dev/${ROOT_DISK}1
-fatlabel /dev/${ROOT_DISK}1 NIXBOOT
+# fatlabel /dev/${ROOT_DISK}1 NIXBOOT
 mount ${ROOT_PARTITION} /mnt
 mkdir /mnt/boot
 mount /dev/${ROOT_DISK}1 /mnt/boot

@@ -15,9 +15,10 @@ ROOT_PARTITION="/dev/${ROOT_DISK}2"
 # Partition and format disk
 parted "/dev/${ROOT_DISK}" ---pretend-input-tty <<EOF
 mktable gpt
-mkpart primary 0% 10%
-mkpart primary 10% 90%
-mkpart primary 90% 100%
+mkpart ESP fat32 0% 5%
+mkpart primary 5% 95%
+mkpart primary linux-swap 95% 100%
+set 1 esp on
 quit
 EOF
 
@@ -68,7 +69,6 @@ cat <<-EOF > "/mnt${CONFIG_SCRIPT}"
   # systemctl enable dhcpcd@eth0.service systemd-resolved.service
 
   systemctl enable systemd-networkd.service systemd-resolved.service
-  ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 
   sed -i 's/#UseDNS yes/UseDNS no/' /etc/ssh/sshd_config
   systemctl enable sshd #rngd vmtoolsd rpcbind
@@ -112,7 +112,9 @@ EOF
 chown -R vagrant $HOME_DIR/.ssh;
 chmod -R go-rwsx $HOME_DIR/.ssh;
 
-echo "export PS1='[\\h \\W]\\$ '" >> /mnt/etc/bash.bashrc
+ln -sf ../run/systemd/resolve/stub-resolv.conf /mnt/etc/resolv.conf
+
+echo 'PROMPT_COLOR="1;31m"; ((UID)) && PROMPT_COLOR="1;32m"; export PS1="\[\033[$PROMPT_COLOR\][\h:\w]\\$\[\033[0m\] "' >> /mnt/etc/bash.bashrc
 
 # clean
 rm -rf /mnt/var/cache

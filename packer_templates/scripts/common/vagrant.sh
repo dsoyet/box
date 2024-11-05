@@ -7,7 +7,7 @@ HOME_DIR="${HOME_DIR:-/home/vagrant}";
 mkdir -p $HOME_DIR/.ssh;
 if [ -f $HOME_DIR/.bashrc ]; then
     sed -i 's:\\u::g' $HOME_DIR/.bashrc 
-    echo "PS1='[@\h \W]\$ '" >> $HOME_DIR/.bashrc 
+    echo "PS1='[\h \W]\$ '" >> $HOME_DIR/.bashrc 
 fi
 # for rocky and centos
 [ -f "/etc/bash.bashrc" ] && sed -i 's:\\u::g' /etc/bash.bashrc
@@ -21,7 +21,7 @@ case $ID in
     sed -i -e 's/AllowTcpForwarding no/AllowTcpForwarding yes/g' -e 's/X11Forwarding no/X11Forwarding yes/g' -e 's/AllowAgentForwarding no/AllowAgentForwarding yes/g' /etc/ssh/sshd_config
     ;;
   freebsd | solaris)
-    echo "PS1='[@\h \W]\$ '" >> $HOME_DIR/.bashrc
+    echo "PS1='[\h \W]\$ '" >> $HOME_DIR/.bashrc
     chown -R vagrant "$HOME_DIR"/.bashrc;
     ;;
 esac

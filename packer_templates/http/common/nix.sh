@@ -72,6 +72,7 @@ cat << 'EOF' > ${CONFIG_SCRIPT}
     wget
   ];
   nix = {
+    package = pkgs.nixFlakes;
     settings = {
       substituters = [ "https://mirrors.cernet.edu.cn/nix-channels/store" ];
       auto-optimise-store = true;

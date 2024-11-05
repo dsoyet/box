@@ -48,6 +48,7 @@ cat << 'EOF' > ${CONFIG_SCRIPT}
   };
   networking.hostName = "nix";
   time.timeZone = "Asia/Shanghai";
+  programs.direnv.enable = true;
   programs.bash.promptInit = ''
   PROMPT_COLOR="1;31m"; ((UID)) && PROMPT_COLOR="1;32m"; export PS1="\[\033[$PROMPT_COLOR\][\h:\w]\\$\[\033[0m\] "
   '';

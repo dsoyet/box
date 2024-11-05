@@ -76,6 +76,8 @@ $ { sleep 10; ls /; } | nc termbin.com 9999
 $ { sleep 10; ls /; } | nc paste.c-net.org 9999
 https://paste.c-net.org/ExampleOne
 
+https://search.nixos.org/options
+
 sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 sudo ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 sudo systemctl start nix-daemon.service

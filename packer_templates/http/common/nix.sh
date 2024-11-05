@@ -35,49 +35,22 @@ nixos-generate-config --root /mnt
 
 # Installation
 cat << 'EOF' > ${CONFIG_SCRIPT}
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
 { config, lib, pkgs, ... }:
-
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
       ./hardware-configuration.nix
     ];
 
-  # Use the systemd-boot EFI boot loader.
   boot.loader = {
 	  systemd-boot.enable = true;
 	  efi.canTouchEfiVariables = true;
-	  timeout = 1; # not set as NixOS defaults to 5 seconds
+	  timeout = 1; 
   };
-  # boot.loader.systemd-boot.enable = true;
-  # boot.loader.efi.canTouchEfiVariables = true;
-
-  networking.hostName = "nix"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-
-  # Set your time zone.
+  networking.hostName = "nix";
   time.timeZone = "Asia/Shanghai";
   programs.bash.promptInit = ''
-  # Provide a nice prompt if the terminal supports it.
-  if [ "$TERM" != "dumb" ] || [ -n "$INSIDE_EMACS" ]; then
-    PROMPT_COLOR="1;31m"
-    ((UID)) && PROMPT_COLOR="1;32m"
-    if [ -n "$INSIDE_EMACS" ]; then
-      # Emacs term mode doesn't support xterm title escape sequence (\e]0;)
-      PS1="\[\033[$PROMPT_COLOR\][@\h:\w]\\$\[\033[0m\] "
-    else
-      PS1="\[\033[$PROMPT_COLOR\][\[\e]0;@\h: \w\a\]@\h:\w]\\$\[\033[0m\] "
-    fi
-    if test "$TERM" = "xterm"; then
-      PS1="\[\033]2;\h:\w\007\]$PS1"
-    fi
-  fi
+  
 '';
 
   # Configure network proxy if necessary

@@ -89,6 +89,9 @@ nix-channel --update
 
 nix-env -iA nixpkgs.hello
 
+nix run home-manager/release-24.05 -- init --switch
+home-manager switch
+
 
 substituters = https://mirrors.cernet.edu.cn/nix-channels/store https://cache.nixos.org/
 

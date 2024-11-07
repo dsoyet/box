@@ -26,7 +26,7 @@ mkfs.ext4 ${ROOT_PARTITION}
 mkfs.fat -F 32 /dev/${ROOT_DISK}1
 mount ${ROOT_PARTITION} /mnt
 mkdir /mnt/boot
-mount /dev/${ROOT_DISK}1 /mnt/boot
+mount -o fmask=0077,dmask=0077 /dev/${ROOT_DISK}1 /mnt/boot
 mkswap -L swap /dev/${ROOT_DISK}3
 swapon /dev/${ROOT_DISK}3
 
@@ -68,9 +68,11 @@ cat << 'EOF' > ${CONFIG_SCRIPT}
   security.sudo.wheelNeedsPassword = false; 
   services.openssh.enable = true;
   environment.systemPackages = with pkgs; [
+    git
     vim
     wget
   ];
+  environment.variables.EDITOR = "vim";
   nix = {
     package = pkgs.nixFlakes;
     settings = {
@@ -82,5 +84,26 @@ cat << 'EOF' > ${CONFIG_SCRIPT}
 }
 EOF
 
-nixos-install --no-root-password
-reboot
+cat << 'EOF' > /mnt/etc/nixos/flake.nix
+{
+  description = "A simple NixOS flake";
+
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+  };
+
+  outputs = { self, nixpkgs, ... }@inputs: {
+    nixosConfigurations.nix = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        ./configuration.nix
+      ];
+    };
+  };
+}
+EOF
+
+sed -i -e 's/fmask=0022/fmask=0077/g' -e 's/dmask=0022/dmask=0077/g' /mnt/etc/nixos/hardware-configuration.nix
+
+nixos-install --flake /mnt/etc/nixos#nix --no-root-password
+# reboot

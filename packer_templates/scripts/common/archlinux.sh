@@ -44,7 +44,7 @@ EOF
 
 echo "root=${ROOT_PARTITION}" >> /mnt/etc/kernel/cmdline
 
-cat << 'EOF' > /mnt/etc/systemd/network/20-wired.network
+cat << 'EOF' > /mnt/etc/systemd/network/wired.network
 [Match]
 Name=e*
 

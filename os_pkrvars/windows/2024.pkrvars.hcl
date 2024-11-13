@@ -1,11 +1,11 @@
 os_name                 = "windows"
 os_version              = "2025"
-build_version           = "10.0.26100.1742"
+build_version           = "10.0.26100.2314"
 os_arch                 = "x86_64"
 os_image                = "Windows Server 2025 ServerDatacenter"
 os_lang                 = "zh-CN"
 is_windows              = true
-iso_url                 = "/osx/Users/Share/Phone/X23-81954_26100.1742.240906-0331.ge_release_svc_refresh_SERVER_OEMRET_x64FRE_zh-cn.iso"
+iso_urls                 = ["/osx/Users/Share/Phone/26100.2314.241105-1703.GE_RELEASE_SVC_PROD1_SERVERDATACENTER_OEMRET_X64FRE_ZH-CN.ISO"]
 odt_url                 = "/osx/Users/Share/Phone/2024.ODT_ZH-CN.ISO"
-iso_checksum            = "sha256:0de6382734c7e6174a163f0ef8f2ef956c77305a74584e0e1328546e81eb521a"
+iso_checksum            = "sha256:9b4bca8be13cb4478d96695f89757d1b6c8c2372e88435643b64d0f921055414"
 boot_command            = ["<enter><enter><enter><enter><enter><enter>"]

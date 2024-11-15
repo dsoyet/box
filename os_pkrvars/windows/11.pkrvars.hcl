@@ -1,11 +1,11 @@
 os_name                 = "windows"
 os_version              = "11"
-build_version           = "10.0.26100.2161"
+build_version           = "10.0.26100.2448"
 os_arch                 = "x86_64"
 os_image                = "Windows 11 Enterprise"
 os_lang                 = "en-US"
 is_windows              = true
-iso_url                 = "/osx/Users/Share/Phone/26100.2161.241018-1636.GE_RELEASE_SVC_PROD3_CLIENTMULTI_X64FRE_EN-US.ISO"
+iso_url                 = "/osx/Users/Share/Phone/26100.2448.241108-1806.GE_RELEASE_SVC_PROD2_CLIENTMULTI_X64FRE_EN-US.ISO"
 odt_url                 = "/osx/Users/Share/Phone/2024.ODT_EN-US.ISO"
-iso_checksum            = "sha256:d70ed681867979cb1606845ab485b0e27afe8d82b1c6b2b6352b4e1f2c195fd3"
+iso_checksum            = "sha256:27a187d6d9aceac1cc5410e36837adc40c83f89059f886cba359fd65c6568114"
 boot_command            = ["<enter><enter><enter><enter><enter><enter>"]

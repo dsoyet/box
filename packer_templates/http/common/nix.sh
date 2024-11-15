@@ -92,7 +92,6 @@ cat << 'EOF' > ${CONFIG_SCRIPT}
   };
   nixpkgs.config.allowUnfree = true;
   nix = {
-    package = pkgs.nixFlakes;
     settings = {
       substituters = [ "https://mirrors.cernet.edu.cn/nix-channels/store" ];
       auto-optimise-store = true;
@@ -148,38 +147,6 @@ cat << 'EOF' > /mnt/etc/nixos/home.nix
     keepassxc
     neofetch
   ];
-  home.file.".config/xfce4/terminal/terminalrc".text = ''
-[Configuration]
-MiscAlwaysShowTabs=FALSE
-MiscBell=FALSE
-MiscBellUrgent=FALSE
-MiscBordersDefault=TRUE
-MiscCursorBlinks=FALSE
-MiscCursorShape=TERMINAL_CURSOR_SHAPE_BLOCK
-MiscDefaultGeometry=80x24
-MiscInheritGeometry=FALSE
-MiscMenubarDefault=TRUE
-MiscMouseAutohide=FALSE
-MiscMouseWheelZoom=TRUE
-MiscToolbarDefault=FALSE
-MiscConfirmClose=TRUE
-MiscCycleTabs=TRUE
-MiscTabCloseButtons=TRUE
-MiscTabCloseMiddleClick=TRUE
-MiscTabPosition=GTK_POS_TOP
-MiscHighlightUrls=TRUE
-MiscMiddleClickOpensUri=FALSE
-MiscCopyOnSelect=FALSE
-MiscShowRelaunchDialog=TRUE
-MiscRewrapOnResize=TRUE
-MiscUseShiftArrowsToScroll=FALSE
-MiscSlimTabs=FALSE
-MiscNewTabAdjacent=FALSE
-MiscSearchDialogOpacity=100
-MiscShowUnsafePasteDialog=TRUE
-MiscRightClickAction=TERMINAL_RIGHT_CLICK_ACTION_CONTEXT_MENU
-ScrollingBar=TERMINAL_SCROLLBAR_NONE
-  '';
   home.file.".config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml".text = ''
 <?xml version="1.0" encoding="UTF-8"?>
 <channel name="xfce4-panel" version="1.0">
@@ -267,7 +234,7 @@ home.file.".config/xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml".text = '
       export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
     '';
     shellAliases = {
-      exp = "neofetch";
+      exp = "sudo nixos-rebuild switch --flake /etc/nixos#nix";
     };
   };
   home.stateVersion = "24.05";
@@ -279,5 +246,3 @@ sed -i -e 's/fmask=0022/fmask=0077/g' -e 's/dmask=0022/dmask=0077/g' /mnt/etc/ni
 
 nixos-install --flake /mnt/etc/nixos#nix --no-root-password
 reboot
-
-# sudo nixos-rebuild switch --flake /etc/nixos#nix

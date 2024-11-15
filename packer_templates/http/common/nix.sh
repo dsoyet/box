@@ -67,6 +67,15 @@ cat << 'EOF' > ${CONFIG_SCRIPT}
   system.stateVersion = "24.05";
   security.sudo.wheelNeedsPassword = false; 
   services.openssh.enable = true;
+  services.xserver = {
+    enable = true;
+    desktopManager = {
+      xfce.enable = true;
+    };
+    displayManager = {
+      startx.enable = true;
+    };
+  };
   environment.systemPackages = with pkgs; [
     git
     vim
@@ -106,4 +115,4 @@ EOF
 sed -i -e 's/fmask=0022/fmask=0077/g' -e 's/dmask=0022/dmask=0077/g' /mnt/etc/nixos/hardware-configuration.nix
 
 nixos-install --flake /mnt/etc/nixos#nix --no-root-password
-# reboot
+reboot

@@ -2,36 +2,24 @@
 
 ### Using `packer`
 
-To build a Ubuntu 22.04 box for only the VirtualBox provider
+To build a archlinux box for only the Qemu provider
 
 ```bash
-cd <path/to>/bento
 packer init -upgrade ./packer_templates
-packer build -only=virtualbox-iso.vm -var-file=os_pkrvars/ubuntu/ubuntu-22.04-x86_64.pkrvars.hcl ./packer_templates
+packer build --only=qemu.vm --var-file=os_pkrvars/bootstrap/archlinux.pkrvars.hcl packer_templates
 ```
 
-To build latest Debian 12 boxes for all possible providers (simultaneously)
+To build latest NixOS 24.05 boxes for Qemu provider
 
 ```bash
-cd <path/to>/bento
 packer init -upgrade ./packer_templates
-packer build -var-file=os_pkrvars/debian/debian-12-x86_64.pkrvars.hcl ./packer_templates
+packer build --only=qemu.vm --var-file=os_pkrvars/bootstrap/nix.pkrvars.hcl packer_templates
 ```
-
-To build latest CentOS 7 boxes for all providers except VMware and Parallels
-
-```bash
-cd <path/to>/bento
-packer init -upgrade ./packer_templates
-packer build -except=parallels-iso.vm,vmware-iso.vm -var-file=os_pkrvars/centos/centos-7-x86_64.pkrvars.hcl ./packer_templates
-```
-
 To use an alternate url
 
 ````bash
-cd <path/to>/bento
 packer init -upgrade ./packer_templates
-packer build -var 'iso_url=https://mirrors.rit.edu/fedora/fedora/linux/releases/39/Server/x86_64/iso/Fedora-Server-dvd-x86_64-39-1.5.iso' -var-file=os_pkrvars/fedora/fedora-39-x86_64.pkrvars.hcl ./packer_templates
+packer build -var 'iso_url=https://mirrors.rit.edu/fedora/fedora/linux/releases/39/Server/x86_64/iso/Fedora-Server-dvd-x86_64-39-1.5.iso' --only=qemu.vm --var-file=os_pkrvars/bootstrap/nix.pkrvars.hcl packer_templates
 ````
 
 If the build is successful, your box files will be in the `builds` directory at the root of the repository.

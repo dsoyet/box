@@ -1,15 +1,37 @@
 # Box
 
+### Build vagrant box for hyperv and qemu
+why use hyperv and libvirt
+- better disk performance (500+MBps) for qcow2 and vhdx
+
+### supported os
+- Windows
+    - 10.0.26100.2448 windows desktop 11  (EN-US ZH-CN)
+    - 10.0.26100.2314 windows server 2025 (EN-US ZH-CN)
+
+- Linux
+    - archlinux
+    - debian
+    - nixos
+    - mint
+    - kali
+    - rocky
+    - opensuse
+    - openeuler
+    - kylin
+    - freebsd
+
+
 ### Using `packer`
 
-To build a archlinux box for only the Qemu provider
+To build latest archlinux box for only the Qemu provider
 
 ```bash
 packer init -upgrade ./packer_templates
 packer build --only=qemu.vm --var-file=os_pkrvars/bootstrap/archlinux.pkrvars.hcl packer_templates
 ```
 
-To build latest NixOS 24.05 boxes for Qemu provider
+To build latest NixOS boxes for Qemu provider
 
 ```bash
 packer init -upgrade ./packer_templates

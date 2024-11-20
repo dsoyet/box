@@ -31,6 +31,7 @@ locals {
       "${path.root}/scripts/windows/openssh.ps1",
       ] : (
       var.os_name == "archlinux" ||
+      var.os_name == "gentoo" ||
       var.os_name == "nix" ? [
         "${path.root}/scripts/common/${var.os_name}.sh"
         ] : (

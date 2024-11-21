@@ -29,6 +29,7 @@ cp /etc/resolv.conf /mnt/gentoo/etc/resolv.conf
 cat << 'EOF' > /mnt/gentoo/etc/portage/make.conf
 EMERGE_DEFAULT_OPTS="--quiet-build --jobs=4 --load-average=4 --autounmask-continue"
 ACCEPT_LICENSE="*"
+USE="dist-kernel"
 GENTOO_MIRRORS="http://mirrors.nju.edu.cn/gentoo/"
 EOF
 cat << 'EOF' > /mnt/gentoo/etc/locale.gen

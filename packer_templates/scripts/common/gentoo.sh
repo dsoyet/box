@@ -66,7 +66,7 @@ sync-webrsync-verify-signature = yes
 EOF
 
 echo sleep...
-sleep 3600
+sleep 360000
 
 # emerge-webrsync
 #equery u sys-apps/systemd

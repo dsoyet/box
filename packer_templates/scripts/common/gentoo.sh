@@ -102,7 +102,7 @@ cat <<-EOF > "/mnt/gentoo${CONFIG_SCRIPT}"
     systemctl enable sshd.service
 
     echo 'CREATE_MAIL_SPOOL=no'>>/etc/default/useradd
-    useradd --create-home --user-group -G wheel vagrant
+    useradd --create-home --user-group -G wheel -c "Lattice Sum" vagrant
     echo 'vagrant:vagrant' | chpasswd
     sed -i 's/# %wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/g' /etc/sudoers
 

@@ -28,6 +28,7 @@ mount --rbind /dev /mnt/gentoo/dev && mount --make-rslave /mnt/gentoo/dev
 cp /etc/resolv.conf /mnt/gentoo/etc/resolv.conf
 
 cat << 'EOF' > /mnt/gentoo/etc/portage/make.conf
+EMERGE_DEFAULT_OPTS="--quiet-build --jobs=4 --load-average=4"
 ACCEPT_LICENSE="*"
 GENTOO_MIRRORS="http://mirrors.nju.edu.cn/gentoo/"
 EOF
@@ -99,6 +100,13 @@ cat <<-EOF > "/mnt/gentoo${CONFIG_SCRIPT}"
 
     mkdir -p /efi/EFI/Boot
     cp /efi/EFI/Linux/gentoo-*.efi /efi/EFI/Boot/bootx64.efi
+
+    emerge --depclean
+    cd /usr/src/linux && make clean
+
+    rm -rf /root/*
+    rm -rf /var/tmp/*
+    rm -rf /usr/portage
 EOF
 chroot /mnt/gentoo ${CONFIG_SCRIPT}
 

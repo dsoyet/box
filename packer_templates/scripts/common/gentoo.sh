@@ -28,21 +28,33 @@ cp /etc/resolv.conf /mnt/gentoo/etc/resolv.conf
 
 cat << 'EOF' > /mnt/gentoo/etc/portage/make.conf
 EMERGE_DEFAULT_OPTS="--quiet-build --jobs=4 --load-average=4 --autounmask-continue"
-ACCEPT_LICENSE="*"
 USE="dist-kernel"
+ACCEPT_LICENSE="*"
 GENTOO_MIRRORS="http://mirrors.nju.edu.cn/gentoo/"
 EOF
 cat << 'EOF' > /mnt/gentoo/etc/locale.gen
 en_GB ISO-8859-1
 en_GB.UTF-8 UTF-8
 EOF
-cat << EOF > /mnt/gentoo/etc/kernel/cmdline
-root=${ROOT_DISK}2
+cat << 'EOF' > /mnt/gentoo/etc/systemd/network/wired.network
+[Match]
+Name=e*
+[Network]
+DHCP=yes
+EOF
+cat << 'EOF' > /mnt/gentoo/etc/portage/package.use/uki
+sys-kernel/installkernel dracut uki -ugrd
+sys-apps/systemd boot
+sys-kernel/gentoo-kernel-bin generic-uki
 EOF
 cat > /mnt/gentoo/etc/fstab <<EOF
 ${ROOT_DISK}1 /efi  vfat noauto,noatime    1 2
-${ROOT_DISK}3 none  swap sw                0 0
 ${ROOT_DISK}2 /     ext4 noauto,noatime    0 1
+EOF
+mkdir -p /mnt/gentoo/etc/dracut.conf.d
+cat << EOF > /mnt/gentoo/etc/dracut.conf.d/uki.conf
+uefi="yes"
+kernel_cmdline="root=${ROOT_DISK}2"
 EOF
 mkdir -p /mnt/gentoo/etc/portage/repos.conf
 cat << 'EOF' > /mnt/gentoo/etc/portage/repos.conf/gentoo.conf
@@ -66,20 +78,37 @@ sync-openpgp-key-refresh-retry-delay-mult = 4
 sync-webrsync-verify-signature = yes
 EOF
 
-echo sleep...
-sleep 360000
+install --mode=0755 /dev/null "/mnt/gentoo${CONFIG_SCRIPT}"
+cat <<-EOF > "/mnt/gentoo${CONFIG_SCRIPT}"
+    emerge-webrsync
+    emerge sys-kernel/gentoo-sources app-portage/gentoolkit
+    eselect kernel set 1
+    emerge sys-kernel/linux-firmware sys-firmware/intel-microcode 
+    emerge sys-kernel/gentoo-kernel-bin
 
-# emerge-webrsync
-#equery u sys-apps/systemd
-# emerge --ask sys-kernel/gentoo-sources app-portage/gentoolkit
-# eselect kernel set 1
-# emerge --ask sys-kernel/linux-firmware sys-firmware/intel-microcode 
-# emerge --ask sys-kernel/installkernel
-# emerge --ask sys-kernel/gentoo-kernel
-# locale-gen
-# ln -sf ../usr/share/zoneinfo/Europe/Brussels /etc/localtime
-# umount -R /mnt/gentoo
-# default/linux/amd64/23.0/desktop/systemd
+    locale-gen
+    ln -sf ../usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
-# libbpf: failed to find '.BTF' ELF section in vmlinux
-# FAILED: load BTF from vmlinux: No data available
+    systemctl enable systemd-networkd.service systemd-resolved.service
+
+    echo 'CREATE_MAIL_SPOOL=no'>>/etc/default/useradd
+    useradd --create-home --user-group vagrant
+    echo 'vagrant:vagrant' | chpasswd
+
+    mkdir -p /efi/EFI/Boot
+    cp /efi/EFI/Linux/gentoo-*.efi /efi/EFI/Boot/bootx64.efi
+EOF
+chroot /mnt/gentoo ${CONFIG_SCRIPT}
+
+export HOME_DIR=/mnt/gentoo/home/vagrant
+mkdir -p $HOME_DIR/.ssh
+cat << 'EOF' > $HOME_DIR/.ssh/authorized_keys
+ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key
+EOF
+
+echo 'PROMPT_COLOR="1;31m"; ((UID)) && PROMPT_COLOR="1;32m"; export PS1="\[\033[$PROMPT_COLOR\][\h:\w]\\$\[\033[0m\] "' >> /mnt/gentoo/etc/bash/bashrc.d/99_user.bash
+
+chown -R vagrant $HOME_DIR/.ssh;
+chmod -R go-rwsx $HOME_DIR/.ssh;
+
+umount -R /mnt/gentoo

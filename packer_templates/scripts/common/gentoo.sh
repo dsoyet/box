@@ -87,7 +87,7 @@ EOF
 install --mode=0755 /dev/null "/mnt/gentoo${CONFIG_SCRIPT}"
 cat <<-EOF > "/mnt/gentoo${CONFIG_SCRIPT}"
     emerge-webrsync
-    emerge sys-kernel/gentoo-sources app-portage/gentoolkit app-eselect/eselect-repository dev-vcs/git
+    emerge sys-kernel/gentoo-sources app-portage/gentoolkit app-eselect/eselect-repository dev-vcs/git app-editors/vim
     eselect kernel set 1
     emerge sys-kernel/linux-firmware sys-firmware/intel-microcode 
     emerge sys-kernel/gentoo-kernel-bin

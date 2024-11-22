@@ -100,6 +100,7 @@ cat <<-EOF > "/mnt/gentoo${CONFIG_SCRIPT}"
 
     mkdir -p /efi/EFI/Boot
     cp /efi/EFI/Linux/gentoo-*.efi /efi/EFI/Boot/bootx64.efi
+    systemd-machine-id-setup
 
     emerge --depclean
     cd /usr/src/linux && make clean

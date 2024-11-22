@@ -87,6 +87,9 @@ cat <<-EOF > "/mnt/gentoo${CONFIG_SCRIPT}"
     emerge sys-kernel/linux-firmware sys-firmware/intel-microcode 
     emerge sys-kernel/gentoo-kernel-bin
 
+    echo "app-admin/sudo -sendmail" > /etc/portage/package.use/sudo
+    emerge app-admin/sudo
+
     locale-gen
     ln -sf ../usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
@@ -95,8 +98,8 @@ cat <<-EOF > "/mnt/gentoo${CONFIG_SCRIPT}"
 
     echo 'CREATE_MAIL_SPOOL=no'>>/etc/default/useradd
     useradd --create-home --user-group vagrant
-    echo 'root:vagrant' | chpasswd
     echo 'vagrant:vagrant' | chpasswd
+    echo 'vagrant ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers
 
     mkdir -p /efi/EFI/Boot
     cp /efi/EFI/Linux/gentoo-*.efi /efi/EFI/Boot/bootx64.efi
@@ -118,6 +121,8 @@ ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7
 EOF
 
 echo 'PROMPT_COLOR="1;31m"; ((UID)) && PROMPT_COLOR="1;32m"; export PS1="\[\033[$PROMPT_COLOR\][\h:\w]\\$\[\033[0m\] "' >> /mnt/gentoo/etc/bash/bashrc.d/99_user.bash
+
+ln -sf ../run/systemd/resolve/stub-resolv.conf /mnt/gentoo/etc/resolv.conf
 
 chown -R vagrant $HOME_DIR/.ssh;
 chmod -R go-rwsx $HOME_DIR/.ssh;

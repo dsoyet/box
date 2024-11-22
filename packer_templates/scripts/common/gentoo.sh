@@ -47,6 +47,11 @@ sys-kernel/installkernel dracut uki -ugrd
 sys-apps/systemd boot
 sys-kernel/gentoo-kernel-bin generic-uki
 EOF
+cat << 'EOF' > /mnt/gentoo/etc/portage/package.use/xfce4
+app-text/poppler -qt5
+dev-libs/libdbusmenu gtk3
+EOF
+# sudo emerge --ask xfce-base/xfce4-meta
 cat > /mnt/gentoo/etc/fstab <<EOF
 ${ROOT_DISK}1 /efi  vfat noauto,noatime    1 2
 ${ROOT_DISK}3 none  swap sw                0 0
@@ -97,9 +102,9 @@ cat <<-EOF > "/mnt/gentoo${CONFIG_SCRIPT}"
     systemctl enable sshd.service
 
     echo 'CREATE_MAIL_SPOOL=no'>>/etc/default/useradd
-    useradd --create-home --user-group vagrant
+    useradd --create-home --user-group -G wheel vagrant
     echo 'vagrant:vagrant' | chpasswd
-    echo 'vagrant ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers
+    sed -i 's/# %wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/g' /etc/sudoers
 
     mkdir -p /efi/EFI/Boot
     cp /efi/EFI/Linux/gentoo-*.efi /efi/EFI/Boot/bootx64.efi
@@ -109,7 +114,7 @@ cat <<-EOF > "/mnt/gentoo${CONFIG_SCRIPT}"
     cd /usr/src/linux && make clean
 
     rm -rf /root/*
-    rm -rf /var/tmp/*
+    rm -rf /var/tmp/* /var/cache/*
     rm -rf /usr/portage
 EOF
 chroot /mnt/gentoo ${CONFIG_SCRIPT}

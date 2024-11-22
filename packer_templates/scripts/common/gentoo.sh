@@ -87,7 +87,7 @@ EOF
 install --mode=0755 /dev/null "/mnt/gentoo${CONFIG_SCRIPT}"
 cat <<-EOF > "/mnt/gentoo${CONFIG_SCRIPT}"
     emerge-webrsync
-    emerge sys-kernel/gentoo-sources app-portage/gentoolkit
+    emerge sys-kernel/gentoo-sources app-portage/gentoolkit app-eselect/eselect-repository dev-vcs/git
     eselect kernel set 1
     emerge sys-kernel/linux-firmware sys-firmware/intel-microcode 
     emerge sys-kernel/gentoo-kernel-bin
@@ -105,6 +105,8 @@ cat <<-EOF > "/mnt/gentoo${CONFIG_SCRIPT}"
     useradd --create-home --user-group -G wheel vagrant
     echo 'vagrant:vagrant' | chpasswd
     sed -i 's/# %wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/g' /etc/sudoers
+
+    emerge xfce-base/xfce4-meta
 
     mkdir -p /efi/EFI/Boot
     cp /efi/EFI/Linux/gentoo-*.efi /efi/EFI/Boot/bootx64.efi

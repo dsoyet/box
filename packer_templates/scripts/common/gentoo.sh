@@ -17,6 +17,7 @@ EOF
 mkfs.btrfs ${ROOT_DISK}2 && mkfs.fat -F 32 ${ROOT_DISK}1
 mount --mkdir ${ROOT_DISK}2 /mnt/gentoo
 mount --mkdir ${ROOT_DISK}1 /mnt/gentoo/efi
+mkswap ${ROOT_DISK}3 && swapon ${ROOT_DISK}3
 
 curl -SsLl ${STAGE3_URL} | tar xJp -C /mnt/gentoo --xattrs --numeric-owner
 
@@ -47,6 +48,7 @@ sys-kernel/gentoo-kernel-bin generic-uki
 EOF
 cat > /mnt/gentoo/etc/fstab <<EOF
 ${ROOT_DISK}1 /efi  vfat noauto,noatime    1 2
+${ROOT_DISK}3 none  swap sw                0 0
 ${ROOT_DISK}2 /     ext4 noauto,noatime    0 1
 EOF
 mkdir -p /mnt/gentoo/etc/dracut.conf.d
@@ -92,6 +94,7 @@ cat <<-EOF > "/mnt/gentoo${CONFIG_SCRIPT}"
 
     echo 'CREATE_MAIL_SPOOL=no'>>/etc/default/useradd
     useradd --create-home --user-group vagrant
+    echo 'root:vagrant' | chpasswd
     echo 'vagrant:vagrant' | chpasswd
 
     mkdir -p /efi/EFI/Boot

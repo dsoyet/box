@@ -27,8 +27,6 @@ mount --rbind /dev /mnt/gentoo/dev && mount --make-rslave /mnt/gentoo/dev
 cp /etc/resolv.conf /mnt/gentoo/etc/resolv.conf
 
 cat << 'EOF' > /mnt/gentoo/etc/portage/make.conf
-EMERGE_DEFAULT_OPTS="--quiet-build --jobs=4 --load-average=4 --autounmask-continue"
-USE="dist-kernel"
 ACCEPT_LICENSE="*"
 GENTOO_MIRRORS="http://mirrors.nju.edu.cn/gentoo/"
 EOF
@@ -90,6 +88,7 @@ cat <<-EOF > "/mnt/gentoo${CONFIG_SCRIPT}"
     ln -sf ../usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
     systemctl enable systemd-networkd.service systemd-resolved.service
+    systemctl enable sshd.service
 
     echo 'CREATE_MAIL_SPOOL=no'>>/etc/default/useradd
     useradd --create-home --user-group vagrant

@@ -100,13 +100,17 @@ cat <<-EOF > "/mnt/gentoo${CONFIG_SCRIPT}"
 
     systemctl enable systemd-networkd.service systemd-resolved.service
     systemctl enable sshd.service
-
+    echo ''>/etc/skel/.bash_logout
     echo 'CREATE_MAIL_SPOOL=no'>>/etc/default/useradd
     useradd --create-home --user-group -G wheel -c "Lattice Sum" vagrant
     echo 'vagrant:vagrant' | chpasswd
     sed -i 's/# %wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/g' /etc/sudoers
 
     emerge xfce-base/xfce4-meta
+    eselect repository enable dilfridge
+    emaint sync -r dilfridge
+    emerge net-misc/xorgxrdp net-misc/tigervnc
+    systemctl enable xrdp.service
 
     mkdir -p /efi/EFI/Boot
     cp /efi/EFI/Linux/gentoo-*.efi /efi/EFI/Boot/bootx64.efi
@@ -123,6 +127,7 @@ chroot /mnt/gentoo ${CONFIG_SCRIPT}
 
 export HOME_DIR=/mnt/gentoo/home/vagrant
 mkdir -p $HOME_DIR/.ssh
+
 cat << 'EOF' > $HOME_DIR/.ssh/authorized_keys
 ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key
 EOF
